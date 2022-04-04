@@ -28,14 +28,14 @@ def selectFunction(cbIndex):
         elif cbIndex==1 :
             return func_ackley
 #Optimization Algorthms
-def Run_HHO(functionIndex):
+def Run_HHO(functionIndex,maxiter):
         #lb=TextBox_lb.text
         lb = [-32768]
         ub = [32768]
         obj_func=selectFunction(functionIndex)  
         dim = 30
         SearchAgents_no = 1000
-        Max_iter = 50
+        Max_iter = maxiter
         solution = HHO(obj_func, lb, ub, dim, SearchAgents_no, Max_iter)
         sol = np.array(solution.result)
         return sol
@@ -57,16 +57,37 @@ def Run_SMA(functionIndex):
         return sol    
 
 class MatplotlibWidget(QMainWindow):
-    
+    #Inputs
+    MaxIter=0      
+    def LoadMenu(self):
+        loadUi("qt_designer.ui",self)
+        
+
+        self.setWindowTitle("Optimization Algorthms")
+
+        self.pushButton.clicked.connect(self.Plot)
+        self.inputButton.clicked.connect(self.InputButton)
+        
+        #Add items to functions combo Box
+        self.functionComboBox.addItem('X^2')
+        self.functionComboBox.addItem('Ackley Function')
+        #Add items to optimization combo Box
+        self.optimizationComboBox.addItem('HHO')
+        self.optimizationComboBox.addItem('SMA')
+        
+        self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
+
     def __init__(self):
         
         QMainWindow.__init__(self)
 
         loadUi("qt_designer.ui",self)
+        
 
         self.setWindowTitle("Optimization Algorthms")
 
         self.pushButton.clicked.connect(self.Plot)
+        self.inputButton.clicked.connect(self.InputButton)
         
         #Add items to functions combo Box
         self.functionComboBox.addItem('X^2')
@@ -89,7 +110,7 @@ class MatplotlibWidget(QMainWindow):
          
     def Plot(self,sol):
         if self.optimizationComboBox.currentIndex()==0 :
-            sol=Run_HHO(self.functionComboBox.currentIndex())
+            sol=Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter))
         elif self.optimizationComboBox.currentIndex()==1 :
             sol=Run_SMA(self.functionComboBox.currentIndex())
         self.MplWidget.canvas.axes.clear()
@@ -97,6 +118,15 @@ class MatplotlibWidget(QMainWindow):
         self.MplWidget.canvas.axes.legend(('Iteration', 'Best fitness'),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
+    def InputButton(self):
+        loadUi("HHO_Inputs.ui",self)
+        self.hhoButton.clicked.connect(self.HHOInputOkButton)
+    #HHO input window    
+    def HHOInputOkButton(self):
+        self.MaxIter=self.maxIterationTextBox.toPlainText()
+        self.LoadMenu()
+        print(self.MaxIter)
+        
 
 
 
