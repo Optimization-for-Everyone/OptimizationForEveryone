@@ -11,6 +11,7 @@ from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as Navigati
 
 import numpy as np
 import random
+import PyQt5
 
 #Functions
 def func_sum(solution):
@@ -28,15 +29,12 @@ def selectFunction(cbIndex):
         elif cbIndex==1 :
             return func_ackley
 #Optimization Algorthms
-def Run_HHO(functionIndex,maxiter):
+def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         #lb=TextBox_lb.text
-        lb = [-32768]
-        ub = [32768]
+        lb = [_lb]
+        ub = [_ub]
         obj_func=selectFunction(functionIndex)  
-        dim = 30
-        SearchAgents_no = 1000
-        Max_iter = maxiter
-        solution = HHO(obj_func, lb, ub, dim, SearchAgents_no, Max_iter)
+        solution = HHO(obj_func, lb, ub, dim, searchAgents_no, maxiter)
         sol = np.array(solution.result)
         return sol
 def Run_SMA(functionIndex):
@@ -57,25 +55,12 @@ def Run_SMA(functionIndex):
         return sol    
 
 class MatplotlibWidget(QMainWindow):
-    #Inputs
-    MaxIter=0      
-    def LoadMenu(self):
-        loadUi("qt_designer.ui",self)
-        
-
-        self.setWindowTitle("Optimization Algorthms")
-
-        self.pushButton.clicked.connect(self.Plot)
-        self.inputButton.clicked.connect(self.InputButton)
-        
-        #Add items to functions combo Box
-        self.functionComboBox.addItem('X^2')
-        self.functionComboBox.addItem('Ackley Function')
-        #Add items to optimization combo Box
-        self.optimizationComboBox.addItem('HHO')
-        self.optimizationComboBox.addItem('SMA')
-        
-        self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
+    #Inputs HHO
+    MaxIter=100
+    dimension=30
+    searchAgentsNo=1000
+    lb = [-32768]
+    ub = [32768]   
 
     def __init__(self):
         
@@ -88,6 +73,7 @@ class MatplotlibWidget(QMainWindow):
 
         self.pushButton.clicked.connect(self.Plot)
         self.inputButton.clicked.connect(self.InputButton)
+        self.infoButton.clicked.connect(self.InfoButton)
         
         #Add items to functions combo Box
         self.functionComboBox.addItem('X^2')
@@ -98,19 +84,16 @@ class MatplotlibWidget(QMainWindow):
         
         self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
 
-    
 
-        #self.MplWidget.canvas.axes.clear()
-        #self.MplWidget.canvas.axes.plot(t, cosinus_signal)
-        #self.MplWidget.canvas.axes.plot(t, sinus_signal)
-        #self.MplWidget.canvas.axes.legend(('cosinus', 'sinus'),loc='upper right')
-        #self.MplWidget.canvas.axes.set_title('Cosinus - Sinus Signal')
-        #self.MplWidget.canvas.draw()
-        
-         
+    def InfoButton(self):
+        if self.functionComboBox.currentIndex()==1 : #Open Ackley Info Window   
+            self.window = PyQt5.QtWidgets.QMainWindow()
+            loadUi('ackleyFunctionWindow.ui', self.window)
+            self.window.show()
+            self.window.okButton.clicked.connect(self.AckleyInfoOkButton)      
     def Plot(self,sol):
         if self.optimizationComboBox.currentIndex()==0 :
-            sol=Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter))
+            sol=Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb),int(self.ub))
         elif self.optimizationComboBox.currentIndex()==1 :
             sol=Run_SMA(self.functionComboBox.currentIndex())
         self.MplWidget.canvas.axes.clear()
@@ -119,16 +102,27 @@ class MatplotlibWidget(QMainWindow):
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
     def InputButton(self):
-        loadUi("HHO_Inputs.ui",self)
-        self.hhoButton.clicked.connect(self.HHOInputOkButton)
+        self.window = PyQt5.QtWidgets.QMainWindow()
+        loadUi('HHO_Inputs.ui', self.window)
+        self.window.show()
+        self.window.hhoButton.clicked.connect(self.HHOInputOkButton)
     #HHO input window    
     def HHOInputOkButton(self):
-        self.MaxIter=self.maxIterationTextBox.toPlainText()
-        self.LoadMenu()
-        print(self.MaxIter)
-        
+        self.MaxIter=self.window.maxIterationTextBox.toPlainText()
+        self.dimension=self.window.dimensionTextBox.toPlainText()
+        self.searchAgentsNo=self.window.searchAgentsTextBox.toPlainText()
+        self.lb=self.window.lbTextBox.toPlainText()
+        self.ub=self.window.ubTextBox.toPlainText()
+        self.window.close()
+    #SMA InpuWindow
+    #=================
+    #=================
+    #=================
+    #Info Ok Buttons
+    def AckleyInfoOkButton(self):        
+        self.window.close()   
 
-
+  
 
 app = QApplication([])
 window = MatplotlibWidget()

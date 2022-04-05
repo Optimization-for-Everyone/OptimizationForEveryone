@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="images">
+    <file>ackley.png</file>
+  </qresource>
+</RCC>
