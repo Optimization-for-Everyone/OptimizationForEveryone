@@ -8,7 +8,7 @@ from HHO import HHO, Levy
 from SMA import BaseSMA, OriginalSMA
 from numpy import sum, pi, exp, sqrt, cos
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
-
+import functions
 import numpy as np
 import random
 
