@@ -1,66 +1,30 @@
 #------------------------------------------------------
 # ---------------------- main.py -----------------------
 # ------------------------------------------------------
+from tabnanny import verbose
 from PyQt5.QtWidgets import*
 from PyQt5.uic import loadUi
-import numpy
-from HHO import HHO, Levy
-from SMA import BaseSMA, OriginalSMA
-from numpy import sum, pi, exp, sqrt, cos
-from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
-
-import numpy as np
-import random
 import PyQt5
-
-#Functions
-def func_sum(solution):
-    return sum(solution ** 2)
-def func_ackley(solution):
-    a, b, c = 20, 0.2, 2 * pi
-    d = len(solution)
-    sum_1 = -a * exp(-b * sqrt(sum(solution ** 2) / d))
-    sum_2 = exp(sum(cos(c * solution)) / d)
-    return sum_1 - sum_2 + a + exp(1)
-#Select wich function used;
-def selectFunction(cbIndex):
-        if cbIndex==0 :
-            return func_sum
-        elif cbIndex==1 :
-            return func_ackley
+import Run_Optimization
+from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
+import OptimizationInputs
 #Optimization Algorthms
-def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
-        #lb=TextBox_lb.text
-        lb = [_lb]
-        ub = [_ub]
-        obj_func=selectFunction(functionIndex)  
-        solution = HHO(obj_func, lb, ub, dim, searchAgents_no, maxiter)
-        sol = np.array(solution.result)
-        return sol
-def Run_SMA(functionIndex):
-        lb = [-100]
-        ub = [100]
-        problem_size = 100       
-        obj_func=selectFunction(functionIndex)
-        verbose = True
-        epoch = 50
-        pop_size = 50
-        md1 = BaseSMA(obj_func, lb, ub, problem_size, verbose, epoch, pop_size)
-        best_pos1, best_fit1, list_loss1, sol1 = md1.train()
-        sol=numpy.array(sol1)
-        # return : the global best solution, the fitness of global best solution and the loss of training process in each epoch/iteration
-        print(md1.solution[0])
-        print(md1.solution[1])
-        print(md1.loss_train)
-        return sol    
+
 
 class MatplotlibWidget(QMainWindow):
     #Inputs HHO
-    MaxIter=100
+    MaxIter=10
     dimension=30
     searchAgentsNo=1000
     lb = [-32768]
-    ub = [32768]   
+    ub = [32768]
+    #Inputs SMA
+    smalb = [-100]
+    smaub = [100]
+    problem_size = 100       
+    verbose = True
+    epoch = 50
+    pop_size = 50
 
     def __init__(self):
         
@@ -76,36 +40,61 @@ class MatplotlibWidget(QMainWindow):
         self.infoButton.clicked.connect(self.InfoButton)
         
         #Add items to functions combo Box
-        self.functionComboBox.addItem('X^2')
-        self.functionComboBox.addItem('Ackley Function')
+        self.functionComboBox.addItem('ackley')
+        self.functionComboBox.addItem('dixonprice')
+        self.functionComboBox.addItem('griewank')
+        self.functionComboBox.addItem('michalewicz')
+        self.functionComboBox.addItem('perm')
+        self.functionComboBox.addItem('powell')
+        self.functionComboBox.addItem('powersum')
+        self.functionComboBox.addItem('rastrigin')
+        self.functionComboBox.addItem('rosenbrock')
+        self.functionComboBox.addItem('schwefel')
+        self.functionComboBox.addItem('sphere')
+        self.functionComboBox.addItem('sum2')
+        self.functionComboBox.addItem('trid')
+        self.functionComboBox.addItem('zakharov')
+        self.functionComboBox.addItem('ellipse')
+        self.functionComboBox.addItem('nesterov')
+        self.functionComboBox.addItem('saddle')
         #Add items to optimization combo Box
         self.optimizationComboBox.addItem('HHO')
         self.optimizationComboBox.addItem('SMA')
+        self.optimizationComboBox.addItem('GA')
         
         self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
 
 
     def InfoButton(self):
-        if self.functionComboBox.currentIndex()==1 : #Open Ackley Info Window   
+        if self.functionComboBox.currentIndex()==0 : #Open Ackley Info Window   
             self.window = PyQt5.QtWidgets.QMainWindow()
             loadUi('ackleyFunctionWindow.ui', self.window)
             self.window.show()
-            self.window.okButton.clicked.connect(self.AckleyInfoOkButton)      
+            self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
+
     def Plot(self,sol):
         if self.optimizationComboBox.currentIndex()==0 :
-            sol=Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb),int(self.ub))
+            sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
         elif self.optimizationComboBox.currentIndex()==1 :
-            sol=Run_SMA(self.functionComboBox.currentIndex())
+            sol=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
+        elif self.optimizationComboBox.currentIndex()==2 :
+            sol=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
         self.MplWidget.canvas.axes.clear()
         self.MplWidget.canvas.axes.plot(sol[1:,1:])
         self.MplWidget.canvas.axes.legend(('Iteration', 'Best fitness'),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
     def InputButton(self):
-        self.window = PyQt5.QtWidgets.QMainWindow()
-        loadUi('HHO_Inputs.ui', self.window)
-        self.window.show()
-        self.window.hhoButton.clicked.connect(self.HHOInputOkButton)
+        if self.optimizationComboBox.currentIndex()==1:
+            self.window = PyQt5.QtWidgets.QMainWindow()
+            loadUi('SMA_Inputs.ui', self.window)
+            self.window.show()
+            self.window.smaButton.clicked.connect(self.SMAInputOkButton)
+        else :
+            self.window = PyQt5.QtWidgets.QMainWindow()
+            loadUi('HHO_Inputs.ui', self.window)
+            self.window.show()
+            self.window.hhoButton.clicked.connect(self.HHOInputOkButton)
     #HHO input window    
     def HHOInputOkButton(self):
         self.MaxIter=self.window.maxIterationTextBox.toPlainText()
@@ -113,6 +102,14 @@ class MatplotlibWidget(QMainWindow):
         self.searchAgentsNo=self.window.searchAgentsTextBox.toPlainText()
         self.lb=self.window.lbTextBox.toPlainText()
         self.ub=self.window.ubTextBox.toPlainText()
+        self.window.close()
+    def SMAInputOkButton(self):
+        self.problem_size=self.window.problemSizeTextBox.toPlainText()
+        self.verbose=self.window.verboseCheckBox.isChecked()
+        self.epoch=self.window.epochTextBox.toPlainText()
+        self.pop_size=self.window.popSizeTextBox.toPlainText()
+        self.smalb=self.window.lbTextBox.toPlainText()
+        self.smaub=self.window.ubTextBox.toPlainText()
         self.window.close()
     #SMA InpuWindow
     #=================

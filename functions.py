@@ -1,6 +1,29 @@
 import numpy as np
 from numpy import abs, cos, exp, mean, pi, prod, sin, sqrt, sum
 
+
+def selectFunction(cbIndex):
+        switcher = {
+        0: ackley,
+        1: dixonprice,
+        2: griewank,
+        3: michalewicz,
+        4: perm,
+        5: powell,
+        6: powersum,
+        7: rastrigin,
+        8: rosenbrock,
+        9: schwefel,
+        10: sphere,
+        11: sum2,
+        12: trid,
+        13: zakharov,
+        14: ellipse,
+        15: nesterov,
+        16: saddle
+    }
+        return switcher.get(cbIndex, "nothing")
+
 def ackley( x, a=20, b=0.2, c=2*pi ):
     x = np.asarray_chkfinite(x)  # ValueError if any NaN or Inf
     n = len(x)
