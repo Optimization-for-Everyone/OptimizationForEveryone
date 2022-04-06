@@ -1,7 +1,8 @@
 import numpy
 from HHO import HHO, Levy
 from numpy import sum, pi, exp, sqrt, cos
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+import GA 
 
 
 ## You can create whatever function you want here
@@ -16,7 +17,7 @@ def func_ackley(solution):
     sum_2 = exp(sum(cos(c * solution)) / d)
     return sum_1 - sum_2 + a + exp(1)
 
-
+""""
 lb = [-32768]
 ub = [32768]
 
@@ -27,8 +28,18 @@ Max_iter = 50
 
 solution = HHO(obj_func, lb, ub, dim, SearchAgents_no, Max_iter)
 sol = numpy.array(solution.result)
+"""
 
+lb = [-100]
+ub = [100]
 
+obj_func = func_ackley
+dim = 30
+SearchAgents_no = 50
+Max_iter = 100
+
+solution = GA.GA(obj_func, -100, 100, dim, SearchAgents_no, Max_iter)
+sol = numpy.array(solution.result)
 
 """"
 lb = [-100]
@@ -42,7 +53,6 @@ Max_iter = 10
 solution = HHO(obj_func, lb, ub, dim, SearchAgents_no, Max_iter)
 sol = numpy.array(solution.result)
 """
-
 
 plt.xlabel ('Iteration', fontsize = 12)
 plt.ylabel ('Best fitness obtained so far', fontsize = 12)
