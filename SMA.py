@@ -40,6 +40,7 @@
 from numpy.random import uniform, choice
 from numpy import abs, zeros, log10, where, arctanh, tanh
 from root import Root
+import numpy as np
 
 
 class BaseSMA(Root):
@@ -65,7 +66,7 @@ class BaseSMA(Root):
         return [pos, fit, weight]
 
     def train(self):
-        sol = [[None,None]]
+        sol = np.zeros(self.epoch)
         pop = [self.create_solution() for _ in range(self.pop_size)]
         pop, g_best = self.get_sorted_pop_and_global_best_solution(pop, self.ID_FIT, self.ID_MIN_PROB)      # Eq.(2.6)
 
@@ -111,7 +112,8 @@ class BaseSMA(Root):
             self.loss_train.append(g_best[self.ID_FIT])
             if self.verbose:
                 print("> Epoch: {}, Best fit: {}".format(epoch + 1, g_best[self.ID_FIT]))
-                sol.append([epoch,g_best[self.ID_FIT]])
+                sol[epoch] = g_best[self.ID_FIT]
+                #sol.append([epoch,g_best[self.ID_FIT]])
         self.solution = g_best
         return g_best[self.ID_POS], g_best[self.ID_FIT], self.loss_train, sol
 

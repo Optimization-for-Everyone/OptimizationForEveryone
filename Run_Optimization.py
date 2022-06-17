@@ -13,7 +13,7 @@ def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         ub = [_ub]
         obj_func=functions.selectFunction(functionIndex)  
         solution = HHO(obj_func, lb, ub, dim, searchAgents_no, maxiter)
-        sol = numpy.array(solution.result)
+        sol = numpy.array(solution.convergence)
         return sol
 def Run_SMA(functionIndex,problem_size,verbose,epoch,pop_size,_lb,_ub):
         lb = [_lb]
@@ -32,7 +32,7 @@ def Run_GA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         ub = [_ub]
         obj_func = functions.selectFunction(functionIndex)
         solution = GA.GA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
-        sol = numpy.array(solution.result)
+        sol = numpy.array(solution.convergence)
         return sol
 
 def Run_GA_Read(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
@@ -44,3 +44,86 @@ def Run_GA_Read(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         sol = numpy.array(solution.result)
         return sol   
 
+def Run_BAT(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = BAT.BAT(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_CS(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = CS.CS(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_DE(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = DE.DE(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_FFA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = FFA.FFA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_GWO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = GWO.GWO(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_JAYA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = JAYA.JAYA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_MFO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = MFO.MFO(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_MVO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = MVO.MVO(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_PSO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = PSO.PSO(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_SCA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = SCA.SCA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_SSA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = SSA.SSA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence
+
+def Run_WOA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = WOA.WOA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        return solution.convergence

@@ -142,8 +142,8 @@ def CS(objf, lb, ub, dim, n, N_IterTotal):
             fmin = fnew
             bestnest = best
 
-        if iter % 10 == 0:
-            print(["At iteration " + str(iter) + " the best fitness is " + str(fmin)])
+        
+        print(["At iteration " + str(iter) + " the best fitness is " + str(fmin)])
         convergence.append(fmin)
 
     timerEnd = time.time()

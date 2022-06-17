@@ -13,7 +13,7 @@ import OptimizationInputs
 
 class MatplotlibWidget(QMainWindow):
     #Inputs HHO
-    MaxIter=10
+    MaxIter=50
     dimension=30
     searchAgentsNo=1000
     lb = [-32768]
@@ -62,7 +62,7 @@ class MatplotlibWidget(QMainWindow):
         elif self.optimizationComboBox.currentIndex()==2 :
             sol=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
         self.MplWidget.canvas.axes.clear()
-        self.MplWidget.canvas.axes.plot(sol[1:,1:])
+        self.MplWidget.canvas.axes.plot(sol)
         self.MplWidget.canvas.axes.legend(('Iteration', 'Best fitness'),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
@@ -71,9 +71,9 @@ class MatplotlibWidget(QMainWindow):
         sol2=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
         sol3=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
         self.MplWidget.canvas.axes.clear()
-        self.MplWidget.canvas.axes.plot(sol[1:,1:])
-        self.MplWidget.canvas.axes.plot(sol2[1:,1:])
-        self.MplWidget.canvas.axes.plot(sol3[1:,1:])
+        self.MplWidget.canvas.axes.plot(sol)
+        self.MplWidget.canvas.axes.plot(sol2)
+        self.MplWidget.canvas.axes.plot(sol3)
         self.MplWidget.canvas.axes.legend(('HHO', 'SMA','GA'),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve') 
         self.MplWidget.canvas.draw()
