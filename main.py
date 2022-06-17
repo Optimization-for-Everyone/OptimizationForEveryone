@@ -132,9 +132,21 @@ def AddItemsToComboBox(self):
         self.functionComboBox.addItem('nesterov')
         self.functionComboBox.addItem('saddle')
         #Add items to optimization combo Box
-        self.optimizationComboBox.addItem('HHO')
-        self.optimizationComboBox.addItem('SMA')
-        self.optimizationComboBox.addItem('GA')
+        self.optimizationComboBox.addItem('BAT')
+        self.optimizationComboBox.addItem('Cuckoo Search (CS)')
+        self.optimizationComboBox.addItem('Differential evolution (DE)')
+        self.optimizationComboBox.addItem('Firefly Optimization Algorithm (FFA)')
+        self.optimizationComboBox.addItem('Genetic Algorithm (GA)')
+        self.optimizationComboBox.addItem('Grey Wolf Optimizer (GWO)')
+        self.optimizationComboBox.addItem('Harris Hawks Optimization (HHO)')
+        self.optimizationComboBox.addItem('JAYA')
+        self.optimizationComboBox.addItem('Moth-Flame Optimization (MFO)')
+        self.optimizationComboBox.addItem('Multi-Verse Optimizer (MVO)')
+        self.optimizationComboBox.addItem('Particle Swarm Optimization (PSO)')
+        self.optimizationComboBox.addItem('Sine Cosine Algorithm (SCA)')
+        self.optimizationComboBox.addItem('Slime Mould Algorithm (SMA)')
+        self.optimizationComboBox.addItem('Salp Swarm Algorithm (SSA)')
+        self.optimizationComboBox.addItem('Whale Optimization Algorithm (WOA)')
 
   
 
