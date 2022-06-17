@@ -5,7 +5,79 @@ import functions
 import GA 
 from SMA import BaseSMA, OriginalSMA
 from solution import solution
+from enumOptimizations import Optimizations
 
+def Single(opt, params, sma):
+    switcher = {
+                Optimizations.BAT: lambda: Run_BAT(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.CS: lambda: Run_CS(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.DE: lambda: Run_DE(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.FFA: lambda: Run_FFA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.GA: lambda: Run_GA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.GWO: lambda: Run_GWO(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.HHO: lambda: Run_HHO(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.JAYA: lambda: Run_JAYA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.MFO: lambda: Run_MFO(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+                Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
+        }
+    func = switcher.get(opt, lambda: 'Invalid')
+    sol = func()
+    return sol
+
+def Triple(opt1, opt2, opt3, params, sma):
+    switcher = {
+            Optimizations.BAT: lambda: Run_BAT(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.CS: lambda: Run_CS(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.DE: lambda: Run_DE(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.FFA: lambda: Run_FFA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.GA: lambda: Run_GA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.GWO: lambda: Run_GWO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.HHO: lambda: Run_HHO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.JAYA: lambda: Run_JAYA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.MFO: lambda: Run_MFO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+            Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
+        }
+    func = switcher.get(opt1, lambda: 'Invalid')
+    func2 = switcher.get(opt2, lambda: 'Invalid')
+    func3 = switcher.get(opt3, lambda: 'Invalid')
+    sol1 = func()
+    sol2 = func2()
+    sol3 = func3()
+    return sol1, sol2, sol3
+
+def Double(opt1, opt2, params, sma):
+    switcher = {
+            Optimizations.BAT: lambda: Run_BAT(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.CS: lambda: Run_CS(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.DE: lambda: Run_DE(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.FFA: lambda: Run_FFA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.GA: lambda: Run_GA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.GWO: lambda: Run_GWO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.HHO: lambda: Run_HHO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.JAYA: lambda: Run_JAYA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.MFO: lambda: Run_MFO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+            Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
+            Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
+        }
+    func = switcher.get(opt1, lambda: 'Invalid')
+    func2 = switcher.get(opt2, lambda: 'Invalid')
+    sol1 = func()
+    sol2 = func2()
+    return sol1, sol2
 
 def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         #lb=TextBox_lb.text

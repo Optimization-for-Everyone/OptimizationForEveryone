@@ -9,7 +9,7 @@ import Run_Optimization
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
 import OptimizationInputs
 #Optimization Algorthms
-
+from enumOptimizations import Optimizations
 
 class MatplotlibWidget(QMainWindow):
     #Inputs HHO
@@ -55,21 +55,29 @@ class MatplotlibWidget(QMainWindow):
             self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
 
     def Plot(self,sol):
+        """
         if self.optimizationComboBox.currentIndex()==0 :
             sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
         elif self.optimizationComboBox.currentIndex()==1 :
             sol=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
         elif self.optimizationComboBox.currentIndex()==2 :
             sol=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
+        """
+        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
+        opt = Optimizations(self.optimizationComboBox.currentIndex())
+        sol = Run_Optimization.Single(opt,params,None)
+        
         self.MplWidget.canvas.axes.clear()
         self.MplWidget.canvas.axes.plot(sol)
-        self.MplWidget.canvas.axes.legend(('Iteration', 'Best fitness'),loc='upper right')
+        self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
     def PlotMultiple(self,sol):
-        sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
-        sol2=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
-        sol3=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
+        #sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
+        #sol2=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
+        #sol3=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
+        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
+        sol1, sol2, sol3 = Run_Optimization.Triple(Optimizations.HHO, Optimizations.SMA,Optimizations.HHO,params,None)
         self.MplWidget.canvas.axes.clear()
         self.MplWidget.canvas.axes.plot(sol)
         self.MplWidget.canvas.axes.plot(sol2)
