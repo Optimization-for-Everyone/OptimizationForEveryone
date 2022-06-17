@@ -428,7 +428,98 @@ def GA(objf, lb, ub, dim, popSize, iters):
                 ]
             )
             s.result.append([l+1,bestScore])
+        print(l)
+    timerEnd = time.time()
+    s.bestIndividual = bestIndividual
+    s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
+    s.executionTime = timerEnd - timerStart
+    s.convergence = convergence_curve
+    s.optimizer = "GA"
+    s.objfname = objf.__name__
+    s.ga = ga
+    return s
 
+
+
+def read(objf, lb, ub, dim, popSize, iters, ga):
+
+    """
+    This is the main method which implements GA
+
+    Parameters
+    ----------
+    objf : function
+        The objective function selected
+    lb: list
+        lower bound limit list
+    ub: list
+        Upper bound limit list
+    dim: int
+        The dimension of the indivisual
+    popSize: int
+        Number of chrmosomes in a population
+    iters: int
+        Number of iterations / generations of GA
+
+    Returns
+    -------
+    obj
+        s: The solution obtained from running the algorithm
+    """
+
+    cp = 1  # crossover Probability
+    mp = 0.01  # Mutation Probability
+    keep = 2
+    # elitism parameter: how many of the best individuals to keep from one generation to the next
+
+    s = solution()
+
+    if not isinstance(lb, list):
+        lb = [lb] * dim
+    if not isinstance(ub, list):
+        ub = [ub] * dim
+
+    bestIndividual = numpy.zeros(dim)
+    scores = numpy.random.uniform(0.0, 1.0, popSize)
+    bestScore = float("inf")
+
+    convergence_curve = numpy.zeros(iters)
+
+    print('GA is optimizing  "' + objf.__name__ + '"')
+
+    timerStart = time.time()
+    s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
+
+    for l in range(iters):
+
+        # crossover
+        ga = crossoverPopulaton(ga, scores, popSize, cp, keep)
+
+        # mutation
+        mutatePopulaton(ga, popSize, mp, keep, lb, ub)
+
+        ga = clearDups(ga, lb, ub)
+
+        scores = calculateCost(objf, ga, popSize, lb, ub)
+
+        bestScore = min(scores)
+
+        # Sort from best to worst
+        ga, scores = sortPopulation(ga, scores)
+
+        convergence_curve[l] = bestScore
+
+        if l % 1 == 0:
+            print(
+                [
+                    "At iteration "
+                    + str(l + 1)
+                    + " the best fitness is "
+                    + str(bestScore)
+                ]
+            )
+            s.result.append([l+1,bestScore])
+        print(l)
     timerEnd = time.time()
     s.bestIndividual = bestIndividual
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")

@@ -14,3 +14,4 @@ class solution:
         self.popnum=0
         self.maxiers=0
         self.result = [[None,None]]
+        self.ga = None

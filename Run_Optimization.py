@@ -1,4 +1,5 @@
-from HHO import HHO, Levy
+from HHO import HHO
+import BAT,CS,DE,FFA,GWO,JAYA,MFO,MVO,PSO,SCA,SSA,WOA
 import numpy
 import functions
 import GA 
@@ -32,4 +33,14 @@ def Run_GA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         obj_func = functions.selectFunction(functionIndex)
         solution = GA.GA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
         sol = numpy.array(solution.result)
-        return sol    
+        return sol
+
+def Run_GA_Read(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        sss = GA.GA(obj_func, -100, 100, dim, searchAgents_no, maxiter)
+        solution = GA.read(obj_func, -100, 100, dim, searchAgents_no, maxiter, sss.ga)
+        sol = numpy.array(solution.result)
+        return sol   
+
