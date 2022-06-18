@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Inputs Window</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -52,31 +52,13 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>150</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>OK</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>10</y>
+      <y>140</y>
       <width>91</width>
-      <height>21</height>
+      <height>31</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
     <property name="text">
-     <string>HHO/GA Inputs</string>
+     <string>Save and Close</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="dimensionTextBox">
@@ -100,7 +82,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>190</x>
       <y>40</y>
       <width>71</width>
       <height>21</height>
@@ -214,6 +196,24 @@
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;maxiter=100&lt;/p&gt;&lt;p&gt;dimension=30&lt;/p&gt;&lt;p&gt;searchagentsno=1000&lt;/p&gt;&lt;p&gt;lb=-32768&lt;/p&gt;&lt;p&gt;ub=32768&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>-10</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Optimization Inputs</string>
     </property>
    </widget>
   </widget>

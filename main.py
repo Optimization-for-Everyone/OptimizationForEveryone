@@ -40,7 +40,7 @@ class MatplotlibWidget(QMainWindow):
         self.pushButton.clicked.connect(self.Plot)
         self.inputButton.clicked.connect(self.InputButton)
         self.infoButton.clicked.connect(self.InfoButton)
-        self.runMultipleButton.clicked.connect(self.PlotMultiple)
+        self.inputButton_2.clicked.connect(self.InputButtonSMA)
         
        
         
@@ -55,47 +55,55 @@ class MatplotlibWidget(QMainWindow):
             self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
 
     def Plot(self,sol):
-        """
-        if self.optimizationComboBox.currentIndex()==0 :
-            sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
-        elif self.optimizationComboBox.currentIndex()==1 :
-            sol=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
-        elif self.optimizationComboBox.currentIndex()==2 :
-            sol=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
-        """
-        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
         opt = Optimizations(self.optimizationComboBox.currentIndex())
-        sol = Run_Optimization.Single(opt,params,None)
-        
-        self.MplWidget.canvas.axes.clear()
-        self.MplWidget.canvas.axes.plot(sol)
-        self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
+        opt2 = Optimizations(self.optimizationComboBox_2.currentIndex())
+        opt3 = Optimizations(self.optimizationComboBox_3.currentIndex())
+        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
+        paramsSMA = self.functionComboBox.currentIndex(), self.problem_size, self.verbose,self.epoch,self.pop_size,self.smalb,self.smaub
+        if self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()==15 :
+            #Run single
+            opt = Optimizations(self.optimizationComboBox.currentIndex())
+            sol = Run_Optimization.Single(opt,params,paramsSMA)
+            self.MplWidget.canvas.axes.clear()
+            self.MplWidget.canvas.axes.plot(sol)
+            self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
+            
+        elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
+            #Run double first and second
+            sol, sol2 = Run_Optimization.Double(opt, opt2,params,paramsSMA)
+            self.MplWidget.canvas.axes.clear()
+            self.MplWidget.canvas.axes.plot(sol)
+            self.MplWidget.canvas.axes.plot(sol2)
+            self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
+        elif self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()!=15 :     
+            # run double first and third
+            sol, sol2 = Run_Optimization.Double(opt, opt3,params,paramsSMA)
+            self.MplWidget.canvas.axes.clear()
+            self.MplWidget.canvas.axes.plot(sol)
+            self.MplWidget.canvas.axes.plot(sol2)
+            self.MplWidget.canvas.axes.legend((opt.name, opt3.name),loc='upper right')
+        else:
+            #run all
+            params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
+            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,params,paramsSMA)
+            self.MplWidget.canvas.axes.clear()
+            self.MplWidget.canvas.axes.plot(sol)
+            self.MplWidget.canvas.axes.plot(sol2)
+            self.MplWidget.canvas.axes.plot(sol3)
+            self.MplWidget.canvas.axes.legend((opt.name, opt2.name,opt3.name),loc='upper right')
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
-    def PlotMultiple(self,sol):
-        #sol=Run_Optimization.Run_HHO(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
-        #sol2=Run_Optimization.Run_SMA(self.functionComboBox.currentIndex(),int(self.problem_size),self.verbose,int(self.epoch),int(self.pop_size),int(self.smalb[0]),int(self.smaub[0]))
-        #sol3=Run_Optimization.Run_GA(self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0]))
-        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
-        sol1, sol2, sol3 = Run_Optimization.Triple(Optimizations.HHO, Optimizations.SMA,Optimizations.HHO,params,None)
-        self.MplWidget.canvas.axes.clear()
-        self.MplWidget.canvas.axes.plot(sol)
-        self.MplWidget.canvas.axes.plot(sol2)
-        self.MplWidget.canvas.axes.plot(sol3)
-        self.MplWidget.canvas.axes.legend(('HHO', 'SMA','GA'),loc='upper right')
-        self.MplWidget.canvas.axes.set_title('Convergence curve') 
-        self.MplWidget.canvas.draw()
+
     def InputButton(self):
-        if self.optimizationComboBox.currentIndex()==1:
-            self.window = PyQt5.QtWidgets.QMainWindow()
-            loadUi('SMA_Inputs.ui', self.window)
-            self.window.show()
-            self.window.smaButton.clicked.connect(self.SMAInputOkButton)
-        else :
             self.window = PyQt5.QtWidgets.QMainWindow()
             loadUi('HHO_Inputs.ui', self.window)
             self.window.show()
             self.window.hhoButton.clicked.connect(self.HHOInputOkButton)
+    def InputButtonSMA(self):       
+            self.window = PyQt5.QtWidgets.QMainWindow()
+            loadUi('SMA_Inputs.ui', self.window)
+            self.window.show()
+            self.window.smaButton.clicked.connect(self.SMAInputOkButton)
     #HHO input window    
     def HHOInputOkButton(self):
         self.MaxIter=self.window.maxIterationTextBox.toPlainText()
@@ -140,23 +148,36 @@ def AddItemsToComboBox(self):
         self.functionComboBox.addItem('nesterov')
         self.functionComboBox.addItem('saddle')
         #Add items to optimization combo Box
-        self.optimizationComboBox.addItem('BAT')
-        self.optimizationComboBox.addItem('Cuckoo Search (CS)')
-        self.optimizationComboBox.addItem('Differential evolution (DE)')
-        self.optimizationComboBox.addItem('Firefly Optimization Algorithm (FFA)')
-        self.optimizationComboBox.addItem('Genetic Algorithm (GA)')
-        self.optimizationComboBox.addItem('Grey Wolf Optimizer (GWO)')
-        self.optimizationComboBox.addItem('Harris Hawks Optimization (HHO)')
-        self.optimizationComboBox.addItem('JAYA')
-        self.optimizationComboBox.addItem('Moth-Flame Optimization (MFO)')
-        self.optimizationComboBox.addItem('Multi-Verse Optimizer (MVO)')
-        self.optimizationComboBox.addItem('Particle Swarm Optimization (PSO)')
-        self.optimizationComboBox.addItem('Sine Cosine Algorithm (SCA)')
-        self.optimizationComboBox.addItem('Slime Mould Algorithm (SMA)')
-        self.optimizationComboBox.addItem('Salp Swarm Algorithm (SSA)')
-        self.optimizationComboBox.addItem('Whale Optimization Algorithm (WOA)')
+        for x in range(3):
+            if x==0:
+                AddToOptimizationCombobox(self.optimizationComboBox)
+            elif x==1:
+                AddToOptimizationCombobox(self.optimizationComboBox_2)
+                self.optimizationComboBox_2.addItem('None')
+                self.optimizationComboBox_2.setCurrentIndex(15)
+            elif x==2:
+                AddToOptimizationCombobox(self.optimizationComboBox_3)
+                self.optimizationComboBox_3.addItem('None')
+                self.optimizationComboBox_3.setCurrentIndex(15)
+                
+        
 
-  
+def AddToOptimizationCombobox(combobox):
+        combobox.addItem('BAT')
+        combobox.addItem('Cuckoo Search (CS)')
+        combobox.addItem('Differential evolution (DE)')
+        combobox.addItem('Firefly Optimization Algorithm (FFA)')
+        combobox.addItem('Genetic Algorithm (GA)')
+        combobox.addItem('Grey Wolf Optimizer (GWO)')
+        combobox.addItem('Harris Hawks Optimization (HHO)')
+        combobox.addItem('JAYA')
+        combobox.addItem('Moth-Flame Optimization (MFO)')
+        combobox.addItem('Multi-Verse Optimizer (MVO)')
+        combobox.addItem('Particle Swarm Optimization (PSO)')
+        combobox.addItem('Sine Cosine Algorithm (SCA)')
+        combobox.addItem('Slime Mould Algorithm (SMA)')
+        combobox.addItem('Salp Swarm Algorithm (SSA)')
+        combobox.addItem('Whale Optimization Algorithm (WOA)')   
 
 app = QApplication([])
 window = MatplotlibWidget()

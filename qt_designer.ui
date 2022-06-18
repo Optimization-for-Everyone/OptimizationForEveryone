@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
-    <height>726</height>
+    <width>1048</width>
+    <height>857</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Optimization For Everyone</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>490</y>
-      <width>101</width>
+      <x>440</x>
+      <y>740</y>
+      <width>121</width>
       <height>51</height>
      </rect>
     </property>
@@ -35,18 +35,18 @@
    <widget class="MplWidget" name="MplWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>180</y>
-      <width>511</width>
-      <height>291</height>
+      <x>120</x>
+      <y>190</y>
+      <width>851</width>
+      <height>531</height>
      </rect>
     </property>
    </widget>
    <widget class="QComboBox" name="functionComboBox">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>110</y>
+      <x>830</x>
+      <y>90</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -63,8 +63,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>80</y>
+      <x>870</x>
+      <y>70</y>
       <width>81</width>
       <height>21</height>
      </rect>
@@ -76,7 +76,7 @@
    <widget class="QLabel" name="TitleLabel">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>350</x>
       <y>0</y>
       <width>351</width>
       <height>61</height>
@@ -95,9 +95,9 @@
    <widget class="QComboBox" name="optimizationComboBox">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>110</y>
-      <width>121</width>
+      <x>50</x>
+      <y>90</y>
+      <width>211</width>
       <height>31</height>
      </rect>
     </property>
@@ -113,22 +113,22 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>80</y>
+      <x>90</x>
+      <y>70</y>
       <width>151</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Optimization Algorthm</string>
+     <string>Optimization Algorthm 1</string>
     </property>
    </widget>
    <widget class="QPushButton" name="inputButton">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>110</y>
-      <width>75</width>
+      <x>440</x>
+      <y>130</y>
+      <width>141</width>
       <height>23</height>
      </rect>
     </property>
@@ -139,8 +139,8 @@
    <widget class="QPushButton" name="infoButton">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>110</y>
+      <x>970</x>
+      <y>90</y>
       <width>31</width>
       <height>31</height>
      </rect>
@@ -149,22 +149,79 @@
      <string>?</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="runMultipleButton">
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>550</y>
-      <width>141</width>
-      <height>51</height>
+      <x>360</x>
+      <y>70</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Optimization Algorthm 2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>70</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Optimization Algorthm 3</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="optimizationComboBox_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>90</y>
+      <width>211</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>16</pointsize>
+      <pointsize>8</pointsize>
      </font>
     </property>
+    <property name="currentText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="optimizationComboBox_3">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>90</y>
+      <width>211</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="currentText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inputButton_2">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>160</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
     <property name="text">
-     <string>Run Multiple</string>
+     <string>Enter Inputs(SMA Only)</string>
     </property>
    </widget>
   </widget>
@@ -173,7 +230,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>835</width>
+     <width>1048</width>
      <height>21</height>
     </rect>
    </property>

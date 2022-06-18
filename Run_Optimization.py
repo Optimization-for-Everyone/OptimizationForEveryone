@@ -21,7 +21,7 @@ def Single(opt, params, sma):
                 Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
-                Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+                Optimizations.SMA: lambda: Run_SMA(sma[0], sma[1], sma[2], sma[3], sma[4], sma[5], sma[6]),
                 Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
         }
@@ -43,7 +43,7 @@ def Triple(opt1, opt2, opt3, params, sma):
             Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
-            Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+            Optimizations.SMA: lambda: Run_SMA(sma[0], sma[1], sma[2], sma[3], sma[4], sma[5], sma[6]),
             Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
         }
@@ -69,7 +69,7 @@ def Double(opt1, opt2, params, sma):
             Optimizations.MVO: lambda: Run_MVO(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.PSO: lambda: Run_PSO(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.SCA: lambda: Run_SCA(params[0],params[1],params[2],params[3],params[4],params[5]),
-            Optimizations.SMA: lambda: Run_SMA(params[0], 100, True, 50, 50, [-100], [100]),
+            Optimizations.SMA: lambda: Run_SMA(sma[0], sma[1], sma[2], sma[3], sma[4], sma[5], sma[6]),
             Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
             Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5])
         }
