@@ -29,15 +29,15 @@ def Single(opt, params, sma):
     sol = func()
     return sol
 
-def Triple(opt1, opt2, opt3, params, sma):
-    sol1 = Single(opt1, params, sma)
-    sol2 = Single(opt2, params, sma)
-    sol3 = Single(opt3, params, sma)
+def Triple(opt1, opt2, opt3, param1,param2,param3, sma):
+    sol1 = Single(opt1, param1, sma)
+    sol2 = Single(opt2, param2, sma)
+    sol3 = Single(opt3, param3, sma)
     return sol1, sol2, sol3
 
-def Double(opt1, opt2, params, sma):
-    sol1 = Single(opt1, params, sma)
-    sol2 = Single(opt2, params, sma)
+def Double(opt1, opt2, param1,param2, sma):
+    sol1 = Single(opt1, param1, sma)
+    sol2 = Single(opt2, param2, sma)
     return sol1, sol2
 
 def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):

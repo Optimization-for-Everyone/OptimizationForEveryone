@@ -1,10 +1,14 @@
 #------------------------------------------------------
 # ---------------------- main.py -----------------------
 # ------------------------------------------------------
+import imp
 from tabnanny import verbose
 from PyQt5.QtWidgets import*
 from PyQt5.uic import loadUi
 import PyQt5
+from matplotlib.pyplot import get
+import functions
+from functions import custom
 import Run_Optimization
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
 import OptimizationInputs
@@ -13,7 +17,7 @@ from enumOptimizations import Optimizations
 
 class MatplotlibWidget(QMainWindow):
     #Inputs HHO
-    MaxIter=50
+    MaxIter=10
     dimension=30
     searchAgentsNo=1000
     lb = [-32768]
@@ -25,6 +29,15 @@ class MatplotlibWidget(QMainWindow):
     verbose = True
     epoch = 50
     pop_size = 50
+     
+    inputs = [] 
+    inputs.append(OptimizationInputs.OptimizationStructure())
+    inputs.append(OptimizationInputs.OptimizationStructure())
+    inputs.append(OptimizationInputs.OptimizationStructure())
+    inputs.append(OptimizationInputs.OptimizationSMAStructure())
+    inputs.append(OptimizationInputs.OptimizationSMAStructure())
+    inputs.append(OptimizationInputs.OptimizationSMAStructure())
+
 
     def __init__(self):
         
@@ -38,14 +51,26 @@ class MatplotlibWidget(QMainWindow):
         #Set button functions
         
         self.pushButton.clicked.connect(self.Plot)
-        self.inputButton.clicked.connect(self.InputButton)
         self.infoButton.clicked.connect(self.InfoButton)
-        self.inputButton_2.clicked.connect(self.InputButtonSMA)
+        self.inputButton.clicked.connect(self.InputButton1)
+        self.inputButton_2.clicked.connect(self.InputButton2)
+        self.inputButton_3.clicked.connect(self.InputButton3)
+
+        self.functionComboBox.currentIndexChanged.connect(self.CustomFunctionSelected)
+        self.functionTextbox.setVisible(False)
+        self.functionLabel.setVisible(False)
         
        
         
         self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
 
+    def CustomFunctionSelected(self):
+         if self.functionComboBox.currentIndex()==17:
+            self.functionTextbox.setVisible(True)
+            self.functionLabel.setVisible(True)
+         else: 
+            self.functionTextbox.setVisible(False)
+            self.functionLabel.setVisible(False)
 
     def InfoButton(self):
         if self.functionComboBox.currentIndex()==0 : #Open Ackley Info Window   
@@ -58,34 +83,42 @@ class MatplotlibWidget(QMainWindow):
         opt = Optimizations(self.optimizationComboBox.currentIndex())
         opt2 = Optimizations(self.optimizationComboBox_2.currentIndex())
         opt3 = Optimizations(self.optimizationComboBox_3.currentIndex())
-        params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
-        paramsSMA = self.functionComboBox.currentIndex(), self.problem_size, self.verbose,self.epoch,self.pop_size,self.smalb,self.smaub
+        if self.functionTextbox.toPlainText()!="":
+            functions.createFunction(str(self.functionTextbox.toPlainText()))
+
+      
+        param1 = self.functionComboBox.currentIndex(),int(self.inputs[0].MaxIter),int(self.inputs[0].dimension),int(self.inputs[0].searchAgentsNo),int(self.inputs[0].lb[0]),int(self.inputs[0].ub[0])
+        param2 = self.functionComboBox.currentIndex(),int(self.inputs[1].MaxIter),int(self.inputs[1].dimension),int(self.inputs[1].searchAgentsNo),int(self.inputs[1].lb[0]),int(self.inputs[1].ub[0])
+        param3 = self.functionComboBox.currentIndex(),int(self.inputs[2].MaxIter),int(self.inputs[2].dimension),int(self.inputs[2].searchAgentsNo),int(self.inputs[2].lb[0]),int(self.inputs[2].ub[0])
+        paramSMA1 = self.functionComboBox.currentIndex(), int(self.inputs[3].problem_size), self.inputs[3].verbose,int(self.inputs[3].epoch),int(self.inputs[3].pop_size),int(self.inputs[3].smalb[0]),int(self.inputs[3].smaub[0])
+        paramSMA2 = self.functionComboBox.currentIndex(), int(self.inputs[4].problem_size), self.inputs[4].verbose,int(self.inputs[4].epoch),int(self.inputs[4].pop_size),int(self.inputs[4].smalb[0]),int(self.inputs[4].smaub[0])
+        paramSMA3 = self.functionComboBox.currentIndex(), int(self.inputs[5].problem_size), self.inputs[5].verbose,int(self.inputs[5].epoch),int(self.inputs[5].pop_size),int(self.inputs[5].smalb[0]),int(self.inputs[5].smaub[0])
+
         if self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run single
             opt = Optimizations(self.optimizationComboBox.currentIndex())
-            sol = Run_Optimization.Single(opt,params,paramsSMA)
+            sol = Run_Optimization.Single(opt,param1,paramSMA1)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
             
         elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run double first and second
-            sol, sol2 = Run_Optimization.Double(opt, opt2,params,paramsSMA)
+            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
             self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
         elif self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()!=15 :     
             # run double first and third
-            sol, sol2 = Run_Optimization.Double(opt, opt3,params,paramsSMA)
+            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
             self.MplWidget.canvas.axes.legend((opt.name, opt3.name),loc='upper right')
         else:
             #run all
-            params = self.functionComboBox.currentIndex(),int(self.MaxIter),int(self.dimension),int(self.searchAgentsNo),int(self.lb[0]),int(self.ub[0])
-            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,params,paramsSMA)
+            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
@@ -94,31 +127,49 @@ class MatplotlibWidget(QMainWindow):
         self.MplWidget.canvas.axes.set_title('Convergence curve')
         self.MplWidget.canvas.draw()
 
-    def InputButton(self):
-            self.window = PyQt5.QtWidgets.QMainWindow()
-            loadUi('HHO_Inputs.ui', self.window)
-            self.window.show()
-            self.window.hhoButton.clicked.connect(self.HHOInputOkButton)
-    def InputButtonSMA(self):       
-            self.window = PyQt5.QtWidgets.QMainWindow()
-            loadUi('SMA_Inputs.ui', self.window)
-            self.window.show()
-            self.window.smaButton.clicked.connect(self.SMAInputOkButton)
+    def InputButton(self,isSMA,input):
+            if  isSMA:
+                #SMA
+                self.window = PyQt5.QtWidgets.QMainWindow()
+                loadUi('SMA_Inputs.ui', self.window)
+                self.window.show()
+                self.window.smaButton.clicked.connect(lambda: self.SMAInputOkButton(input))
+            else:
+                #Other Optimizations
+                 self.window = PyQt5.QtWidgets.QMainWindow()
+                 loadUi('HHO_Inputs.ui', self.window)
+                 self.window.show()
+                 self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
+    def InputButton1(self):
+        isSMA = self.optimizationComboBox.currentIndex()==12
+        self.InputButton(isSMA,0)
+    def InputButton2(self):
+        if self.optimizationComboBox_2.currentText()=="None" :
+            return
+        isSMA = self.optimizationComboBox_2.currentIndex()==12
+        self.InputButton(isSMA,1)
+    def InputButton3(self):
+        if self.optimizationComboBox_3.currentText()=="None" :
+            return
+        isSMA = self.optimizationComboBox_3.currentIndex()==12
+        self.InputButton(isSMA,2)        
+
+            
     #HHO input window    
-    def HHOInputOkButton(self):
-        self.MaxIter=self.window.maxIterationTextBox.toPlainText()
-        self.dimension=self.window.dimensionTextBox.toPlainText()
-        self.searchAgentsNo=self.window.searchAgentsTextBox.toPlainText()
-        self.lb=self.window.lbTextBox.toPlainText()
-        self.ub=self.window.ubTextBox.toPlainText()
+    def HHOInputOkButton(self,inputNumber):
+        self.inputs[inputNumber].MaxIter=self.window.maxIterationTextBox.toPlainText()
+        self.inputs[inputNumber].dimension=self.window.dimensionTextBox.toPlainText()
+        self.inputs[inputNumber].searchAgentsNo=self.window.searchAgentsTextBox.toPlainText()
+        self.inputs[inputNumber].lb=self.window.lbTextBox.toPlainText()
+        self.inputs[inputNumber].ub=self.window.ubTextBox.toPlainText()
         self.window.close()
-    def SMAInputOkButton(self):
-        self.problem_size=self.window.problemSizeTextBox.toPlainText()
-        self.verbose=self.window.verboseCheckBox.isChecked()
-        self.epoch=self.window.epochTextBox.toPlainText()
-        self.pop_size=self.window.popSizeTextBox.toPlainText()
-        self.smalb=self.window.lbTextBox.toPlainText()
-        self.smaub=self.window.ubTextBox.toPlainText()
+    def SMAInputOkButton(self,inputNumber):
+        self.inputs[inputNumber+3].problem_size=self.window.problemSizeTextBox.toPlainText()
+        self.inputs[inputNumber+3].verbose=self.window.verboseCheckBox.isChecked()
+        self.inputs[inputNumber+3].epoch=self.window.epochTextBox.toPlainText()
+        self.inputs[inputNumber+3].pop_size=self.window.popSizeTextBox.toPlainText()
+        self.inputs[inputNumber+3].smalb=self.window.lbTextBox.toPlainText()
+        self.inputs[inputNumber+3].smaub=self.window.ubTextBox.toPlainText()
         self.window.close()
     #SMA InpuWindow
     #=================
@@ -147,6 +198,8 @@ def AddItemsToComboBox(self):
         self.functionComboBox.addItem('ellipse')
         self.functionComboBox.addItem('nesterov')
         self.functionComboBox.addItem('saddle')
+        self.functionComboBox.addItem('custom')
+
         #Add items to optimization combo Box
         for x in range(3):
             if x==0:

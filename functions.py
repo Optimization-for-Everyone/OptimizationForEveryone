@@ -5,10 +5,10 @@ function = "sum(x**2)"
 
 
 
-def getFuction(f):
+def createFunction(f):
     function = f
 
-def runFunction(x):
+def custom(x):
     x = np.asarray_chkfinite(x)
     return eval(function)
 
@@ -30,7 +30,8 @@ def selectFunction(cbIndex):
         13: zakharov,
         14: ellipse,
         15: nesterov,
-        16: saddle
+        16: saddle,
+        17: custom
     }
         return switcher.get(cbIndex, "nothing")
 

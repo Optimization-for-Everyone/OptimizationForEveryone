@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1048</width>
+    <width>1134</width>
     <height>857</height>
    </rect>
   </property>
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>740</y>
+      <x>470</x>
+      <y>760</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -35,8 +35,8 @@
    <widget class="MplWidget" name="MplWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>190</y>
+      <x>130</x>
+      <y>220</y>
       <width>851</width>
       <height>531</height>
      </rect>
@@ -126,7 +126,7 @@
    <widget class="QPushButton" name="inputButton">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>80</x>
       <y>130</y>
       <width>141</width>
       <height>23</height>
@@ -211,17 +211,59 @@
      <string/>
     </property>
    </widget>
+   <widget class="QTextEdit" name="functionTextbox">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>150</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="functionLabel">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>130</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Custom Functıon</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="inputButton_2">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>160</y>
+      <x>360</x>
+      <y>130</y>
       <width>141</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Enter Inputs(SMA Only)</string>
+     <string>Enter Inputs</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inputButton_3">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>130</y>
+      <width>141</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enter Inputs</string>
     </property>
    </widget>
   </widget>
@@ -230,7 +272,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1048</width>
+     <width>1134</width>
      <height>21</height>
     </rect>
    </property>
