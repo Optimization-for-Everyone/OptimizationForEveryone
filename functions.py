@@ -1,6 +1,16 @@
 import numpy as np
-from numpy import abs, cos, exp, mean, pi, prod, sin, sqrt, sum
+from numpy import sin, cos, tan ,cosh, tanh, sinh, abs, exp, mean, pi, prod, sqrt, sum
 
+function = "sum(x**2)"
+
+
+
+def getFuction(f):
+    function = f
+
+def runFunction(x):
+    x = np.asarray_chkfinite(x)
+    return eval(function)
 
 def selectFunction(cbIndex):
         switcher = {
