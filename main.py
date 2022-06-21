@@ -72,12 +72,65 @@ class MatplotlibWidget(QMainWindow):
             self.functionTextbox.setVisible(False)
             self.functionLabel.setVisible(False)
 
+# switcher = {
+#         0: 'ackleyFunctionWindow.ui',
+#         1: 'DixonPriceFunctionWindow.ui',
+#         2: 'GriewankFunctionWindow.ui',
+#         3: 'MichalewiczFunctionWindow.ui',
+#         4: 'PermFunctionWindow.ui',
+#         5: 'PowellFunctionWindow.ui',
+#         6: 'PowerSumFunctionWindow.ui',
+#         7: 'rastriginFunctionWindow.ui',
+#         8: 'rosenbrockFunctionWindow.ui',
+#         9: 'schwefelFunctionWindow.ui',
+#         10: 'sphereFunctionWindow.ui',
+#         11: 'sum2FunctionWindow.ui',
+#         12: 'tridFunctionWindow.ui',
+#         13: 'zakharovFunctionWindow.ui',
+#         14: 'ellipseFunctionWindow.ui',
+#         15: 'nesterovFunctionWindow.ui',
+#         16: 'saddleFunctionWindow.ui',
+#         17: ''
+#         }
+#         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
+#         if infowindow =='':
+#             return
+#         else  :  
+#             loadUi(infowindow,self.window)    
+#             self.window.show()
+#             self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
+
     def InfoButton(self):
-        if self.functionComboBox.currentIndex()==0 : #Open Ackley Info Window   
+
+        switcher = {
+            0: 'ackleyFunctionWindow.ui',
+            1: 'DixonPriceFunctionWindow.ui',
+            2: 'GriewankFunctionWindow.ui',
+            3: 'MichalewiczFunctionWindow.ui',
+            4: 'PermFunctionWindow.ui',
+            5: 'PowellFunctionWindow.ui',
+            6: 'PowerSumFunctionWindow.ui',
+            7: 'rastriginFunctionWindow.ui',
+            8: 'rosenbrockFunctionWindow.ui',
+            9: 'schwefelFunctionWindow.ui',
+            10: 'sphereFunctionWindow.ui',
+            11: 'sum2FunctionWindow.ui',
+            12: 'tridFunctionWindow.ui',
+            13: 'zakharovFunctionWindow.ui',
+            14: 'ellipseFunctionWindow.ui',
+            15: 'nesterovFunctionWindow.ui',
+            16: 'saddleFunctionWindow.ui',
+            17: ''
+        }
+        infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
+
+        if self.functionComboBox.currentIndex()==17 : #Check if custom selected   
+            return
+        else: 
             self.window = PyQt5.QtWidgets.QMainWindow()
-            loadUi('ackleyFunctionWindow.ui', self.window)
-            self.window.show()
-            self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
+            loadUi(infowindow, self.window)           
+        self.window.show()
+        self.window.okButton.clicked.connect(self.AckleyInfoOkButton)          
 
     def Plot(self,sol):
         opt = Optimizations(self.optimizationComboBox.currentIndex())

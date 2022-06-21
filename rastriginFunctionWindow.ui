@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>642</height>
+    <width>774</width>
+    <height>692</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,23 +29,23 @@
      </font>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;The Ackley function is widely used for testing optimization algorithms. &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;In its two-dimensional form, as shown in the plot , it is characterized by a nearly flat outer region, &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;and a large hole at the centre. The function poses a risk for optimization algorithms, particularly hillclimbing algorithms, &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;to be trapped in one of its many local minima.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Helvetica'; color:#000000; background-color:#ffffff;&quot;&gt;The Rastrigin function has several local minima. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Helvetica'; color:#000000; background-color:#ffffff;&quot;&gt;It is highly multimodal, but locations of the minima are regularly distributed.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-family:'Helvetica'; color:#000000; background-color:#ffffff;&quot;&gt;It is shown in the plot above in its two-dimensional form.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>130</y>
-      <width>481</width>
-      <height>321</height>
+      <x>100</x>
+      <y>150</y>
+      <width>551</width>
+      <height>351</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>images/ackley.png</pixmap>
+     <pixmap>images/rastrigin.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -64,32 +64,13 @@
      <string>OK</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
-      <y>460</y>
-      <width>481</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>images/ackleyMath.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
+     <width>774</width>
      <height>21</height>
     </rect>
    </property>
