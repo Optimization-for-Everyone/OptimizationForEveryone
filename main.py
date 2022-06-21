@@ -144,12 +144,24 @@ class MatplotlibWidget(QMainWindow):
                 loadUi('SMA_Inputs.ui', self.window)
                 self.window.show()
                 self.window.smaButton.clicked.connect(lambda: self.SMAInputOkButton(input))
+                #Set predefined values
+                self.window.problemSizeTextBox.setText("100")
+                self.window.epochTextBox.setText("10")
+                self.window.popSizeTextBox.setText("50")
+                self.window.lbTextBox.setText("-100")
+                self.window.ubTextBox.setText("100")
             else:
                 #Other Optimizations
-                 self.window = PyQt5.QtWidgets.QMainWindow()
-                 loadUi('HHO_Inputs.ui', self.window)
-                 self.window.show()
-                 self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
+                self.window = PyQt5.QtWidgets.QMainWindow()
+                loadUi('Inputs.ui', self.window)
+                self.window.show()
+                self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
+                #Set predefined values
+                self.window.maxIterationTextBox.setText("10")
+                self.window.dimensionTextBox.setText("30")
+                self.window.searchAgentsTextBox.setText("1000")
+                self.window.lbTextBox.setText("-32768")
+                self.window.ubTextBox.setText("32768")
     def InputButton1(self):
         isSMA = self.optimizationComboBox.currentIndex()==12
         self.InputButton(isSMA,0)
