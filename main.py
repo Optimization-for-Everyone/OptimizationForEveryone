@@ -1,7 +1,6 @@
 #------------------------------------------------------
 # ---------------------- main.py -----------------------
 # ------------------------------------------------------
-import imp
 from tabnanny import verbose
 from PyQt5.QtWidgets import*
 from PyQt5.uic import loadUi
@@ -16,20 +15,6 @@ import OptimizationInputs
 from enumOptimizations import Optimizations
 
 class MatplotlibWidget(QMainWindow):
-    #Inputs HHO
-    MaxIter=10
-    dimension=30
-    searchAgentsNo=1000
-    lb = [-32768]
-    ub = [32768]
-    #Inputs SMA
-    smalb = [-100]
-    smaub = [100]
-    problem_size = 100       
-    verbose = True
-    epoch = 50
-    pop_size = 50
-     
     inputs = [] 
     inputs.append(OptimizationInputs.OptimizationStructure())
     inputs.append(OptimizationInputs.OptimizationStructure())
@@ -72,34 +57,6 @@ class MatplotlibWidget(QMainWindow):
             self.functionTextbox.setVisible(False)
             self.functionLabel.setVisible(False)
 
-# switcher = {
-#         0: 'ackleyFunctionWindow.ui',
-#         1: 'DixonPriceFunctionWindow.ui',
-#         2: 'GriewankFunctionWindow.ui',
-#         3: 'MichalewiczFunctionWindow.ui',
-#         4: 'PermFunctionWindow.ui',
-#         5: 'PowellFunctionWindow.ui',
-#         6: 'PowerSumFunctionWindow.ui',
-#         7: 'rastriginFunctionWindow.ui',
-#         8: 'rosenbrockFunctionWindow.ui',
-#         9: 'schwefelFunctionWindow.ui',
-#         10: 'sphereFunctionWindow.ui',
-#         11: 'sum2FunctionWindow.ui',
-#         12: 'tridFunctionWindow.ui',
-#         13: 'zakharovFunctionWindow.ui',
-#         14: 'ellipseFunctionWindow.ui',
-#         15: 'nesterovFunctionWindow.ui',
-#         16: 'saddleFunctionWindow.ui',
-#         17: ''
-#         }
-#         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
-#         if infowindow =='':
-#             return
-#         else  :  
-#             loadUi(infowindow,self.window)    
-#             self.window.show()
-#             self.window.okButton.clicked.connect(self.AckleyInfoOkButton)
-
     def InfoButton(self):
 
         switcher = {
@@ -140,12 +97,12 @@ class MatplotlibWidget(QMainWindow):
             functions.createFunction(str(self.functionTextbox.toPlainText()))
 
       
-        param1 = self.functionComboBox.currentIndex(),int(self.inputs[0].MaxIter),int(self.inputs[0].dimension),int(self.inputs[0].searchAgentsNo),int(self.inputs[0].lb[0]),int(self.inputs[0].ub[0])
-        param2 = self.functionComboBox.currentIndex(),int(self.inputs[1].MaxIter),int(self.inputs[1].dimension),int(self.inputs[1].searchAgentsNo),int(self.inputs[1].lb[0]),int(self.inputs[1].ub[0])
-        param3 = self.functionComboBox.currentIndex(),int(self.inputs[2].MaxIter),int(self.inputs[2].dimension),int(self.inputs[2].searchAgentsNo),int(self.inputs[2].lb[0]),int(self.inputs[2].ub[0])
-        paramSMA1 = self.functionComboBox.currentIndex(), int(self.inputs[3].problem_size), self.inputs[3].verbose,int(self.inputs[3].epoch),int(self.inputs[3].pop_size),int(self.inputs[3].smalb[0]),int(self.inputs[3].smaub[0])
-        paramSMA2 = self.functionComboBox.currentIndex(), int(self.inputs[4].problem_size), self.inputs[4].verbose,int(self.inputs[4].epoch),int(self.inputs[4].pop_size),int(self.inputs[4].smalb[0]),int(self.inputs[4].smaub[0])
-        paramSMA3 = self.functionComboBox.currentIndex(), int(self.inputs[5].problem_size), self.inputs[5].verbose,int(self.inputs[5].epoch),int(self.inputs[5].pop_size),int(self.inputs[5].smalb[0]),int(self.inputs[5].smaub[0])
+        param1 = self.functionComboBox.currentIndex(),int(self.inputs[0].MaxIter),int(self.inputs[0].dimension),int(self.inputs[0].searchAgentsNo),int(self.inputs[0].lb),int(self.inputs[0].ub)
+        param2 = self.functionComboBox.currentIndex(),int(self.inputs[1].MaxIter),int(self.inputs[1].dimension),int(self.inputs[1].searchAgentsNo),int(self.inputs[1].lb),int(self.inputs[1].ub)
+        param3 = self.functionComboBox.currentIndex(),int(self.inputs[2].MaxIter),int(self.inputs[2].dimension),int(self.inputs[2].searchAgentsNo),int(self.inputs[2].lb),int(self.inputs[2].ub)
+        paramSMA1 = self.functionComboBox.currentIndex(), int(self.inputs[3].problem_size), self.inputs[3].verbose,int(self.inputs[3].epoch),int(self.inputs[3].pop_size),int(self.inputs[3].smalb),int(self.inputs[3].smaub)
+        paramSMA2 = self.functionComboBox.currentIndex(), int(self.inputs[4].problem_size), self.inputs[4].verbose,int(self.inputs[4].epoch),int(self.inputs[4].pop_size),int(self.inputs[4].smalb),int(self.inputs[4].smaub)
+        paramSMA3 = self.functionComboBox.currentIndex(), int(self.inputs[5].problem_size), self.inputs[5].verbose,int(self.inputs[5].epoch),int(self.inputs[5].pop_size),int(self.inputs[5].smalb),int(self.inputs[5].smaub)
 
         if self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run single
