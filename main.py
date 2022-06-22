@@ -145,11 +145,12 @@ class MatplotlibWidget(QMainWindow):
                 self.window.show()
                 self.window.smaButton.clicked.connect(lambda: self.SMAInputOkButton(input))
                 #Set predefined values
-                self.window.problemSizeTextBox.setText("100")
-                self.window.epochTextBox.setText("10")
-                self.window.popSizeTextBox.setText("50")
-                self.window.lbTextBox.setText("-100")
-                self.window.ubTextBox.setText("100")
+                self.window.problemSizeTextBox.setText(str(self.inputs[input+3].problem_size))
+                self.window.verboseCheckBox.setChecked(self.inputs[input+3].verbose)
+                self.window.epochTextBox.setText(str(self.inputs[input+3].epoch))
+                self.window.popSizeTextBox.setText(str(self.inputs[input+3].pop_size))
+                self.window.lbTextBox.setText(str(self.inputs[input+3].smalb))
+                self.window.ubTextBox.setText(str(self.inputs[input+3].smaub))
             else:
                 #Other Optimizations
                 self.window = PyQt5.QtWidgets.QMainWindow()
@@ -157,11 +158,11 @@ class MatplotlibWidget(QMainWindow):
                 self.window.show()
                 self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
                 #Set predefined values
-                self.window.maxIterationTextBox.setText("10")
-                self.window.dimensionTextBox.setText("30")
-                self.window.searchAgentsTextBox.setText("1000")
-                self.window.lbTextBox.setText("-32768")
-                self.window.ubTextBox.setText("32768")
+                self.window.maxIterationTextBox.setText(str(self.inputs[input].MaxIter))
+                self.window.dimensionTextBox.setText(str(self.inputs[input].dimension))
+                self.window.searchAgentsTextBox.setText(str(self.inputs[input].searchAgentsNo))
+                self.window.lbTextBox.setText(str(self.inputs[input].lb))
+                self.window.ubTextBox.setText(str(self.inputs[input].ub))
     def InputButton1(self):
         isSMA = self.optimizationComboBox.currentIndex()==12
         self.InputButton(isSMA,0)
