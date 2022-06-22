@@ -114,21 +114,21 @@ class MatplotlibWidget(QMainWindow):
             
         elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run double first and second
-            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1)
+            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
             self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
         elif self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()!=15 :     
             # run double first and third
-            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1)
+            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
             self.MplWidget.canvas.axes.legend((opt.name, opt3.name),loc='upper right')
         else:
             #run all
-            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1)
+            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1,paramSMA2,paramSMA3)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol)
             self.MplWidget.canvas.axes.plot(sol2)
