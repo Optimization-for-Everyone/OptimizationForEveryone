@@ -171,7 +171,7 @@ def MFO(objf, lb, ub, dim, N, Max_iteration):
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
-    s.convergence = Convergence_curve
+    s.convergence = Convergence_curve[1:]
     s.optimizer = "MFO"
     s.objfname = objf.__name__
 

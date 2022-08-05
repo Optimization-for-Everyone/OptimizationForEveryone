@@ -13,6 +13,9 @@ from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as Navigati
 import OptimizationInputs
 #Optimization Algorthms
 from enumOptimizations import Optimizations
+from solution import solution
+#from write_operations import WriteOperations
+import enumFunctions
 
 class MatplotlibWidget(QMainWindow):
     inputs = [] 
@@ -109,8 +112,10 @@ class MatplotlibWidget(QMainWindow):
             opt = Optimizations(self.optimizationComboBox.currentIndex())
             sol = Run_Optimization.Single(opt,param1,paramSMA1)
             self.MplWidget.canvas.axes.clear()
-            self.MplWidget.canvas.axes.plot(sol)
+            self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
+            functionName = enumFunctions.Optimizations(self.functionComboBox.currentIndex())
+            #WriteOperations(opt.name,functionName.name,sol).write()
             
         elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run double first and second

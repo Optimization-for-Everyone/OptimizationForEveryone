@@ -1,8 +1,8 @@
 import numpy
-from HHO import HHO, Levy
+from algorithms.HHO import HHO, Levy
 from numpy import sum, pi, exp, sqrt, cos
 import matplotlib.pyplot as plt
-import GA 
+from algorithms import GA 
 
 
 ## You can create whatever function you want here

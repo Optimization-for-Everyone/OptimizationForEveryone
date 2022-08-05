@@ -47,7 +47,7 @@ def SSA(objf, lb, ub, dim, N, Max_iteration):
     FoodPosition = numpy.copy(Sorted_salps[0, :])
     FoodFitness = sorted_salps_fitness[0]
 
-    Iteration = 1
+    Iteration = 0
 
     # Main loop
     while Iteration < Max_iteration:
