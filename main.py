@@ -14,7 +14,7 @@ import OptimizationInputs
 #Optimization Algorthms
 from enumOptimizations import Optimizations
 from solution import solution
-#from write_operations import WriteOperations
+from write_operations import WriteOperations
 import enumFunctions
 
 class MatplotlibWidget(QMainWindow):
@@ -115,7 +115,7 @@ class MatplotlibWidget(QMainWindow):
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
             functionName = enumFunctions.Optimizations(self.functionComboBox.currentIndex())
-            #WriteOperations(opt.name,functionName.name,sol).write()
+            WriteOperations(opt.name,functionName.name,sol).write()
             
         elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
             #Run double first and second

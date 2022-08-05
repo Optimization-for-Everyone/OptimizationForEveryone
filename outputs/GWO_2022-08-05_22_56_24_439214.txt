@@ -1,0 +1,8 @@
+Optimizer: GWO
+ObjFucName: ackley
+StartTime: 2022-08-05-22-56-17
+EndTime: 2022-08-05-22-56-24
+ExecutionTime: 6.557156085968018
+Best: 0
+BestIndividual:
+[]

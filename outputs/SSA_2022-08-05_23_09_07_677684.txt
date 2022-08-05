@@ -1,0 +1,8 @@
+Optimizer: SSA
+ObjFucName: ackley
+StartTime: 2022-08-05-23-09-07
+EndTime: 2022-08-05-23-09-07
+ExecutionTime: 0.3740267753601074
+Best: 0
+BestIndividual:
+[]

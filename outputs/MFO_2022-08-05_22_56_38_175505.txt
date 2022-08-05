@@ -1,0 +1,8 @@
+Optimizer: MFO
+ObjFucName: ackley
+StartTime: 2022-08-05-22-56-37
+EndTime: 2022-08-05-22-56-38
+ExecutionTime: 0.29902219772338867
+Best: 0
+BestIndividual:
+[]

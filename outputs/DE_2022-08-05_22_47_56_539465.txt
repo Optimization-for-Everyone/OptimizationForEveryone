@@ -1,0 +1,8 @@
+Optimizer: DE
+ObjFucName: ackley
+StartTime: 2022-08-05-22-47-54
+EndTime: 2022-08-05-22-47-56
+ExecutionTime: 1.8091344833374023
+Best: 20.52526896062655
+BestIndividual:
+[]

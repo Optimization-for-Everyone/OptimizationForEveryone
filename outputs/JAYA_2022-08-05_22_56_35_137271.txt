@@ -1,0 +1,8 @@
+Optimizer: JAYA
+ObjFucName: ackley
+StartTime: 2022-08-05-22-56-33
+EndTime: 2022-08-05-22-56-35
+ExecutionTime: 1.1820874214172363
+Best: 0
+BestIndividual:
+[]
