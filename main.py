@@ -31,7 +31,7 @@ class MatplotlibWidget(QMainWindow):
         
         QMainWindow.__init__(self)
 
-        loadUi("qt_designer.ui",self)
+        loadUi("UI/qt_designer.ui",self)
         AddItemsToComboBox(self)
         
 
@@ -63,23 +63,23 @@ class MatplotlibWidget(QMainWindow):
     def InfoButton(self):
 
         switcher = {
-            0: 'ackleyFunctionWindow.ui',
-            1: 'DixonPriceFunctionWindow.ui',
-            2: 'GriewankFunctionWindow.ui',
-            3: 'MichalewiczFunctionWindow.ui',
-            4: 'PermFunctionWindow.ui',
-            5: 'PowellFunctionWindow.ui',
-            6: 'PowerSumFunctionWindow.ui',
-            7: 'rastriginFunctionWindow.ui',
-            8: 'rosenbrockFunctionWindow.ui',
-            9: 'schwefelFunctionWindow.ui',
-            10: 'sphereFunctionWindow.ui',
-            11: 'sum2FunctionWindow.ui',
-            12: 'tridFunctionWindow.ui',
-            13: 'zakharovFunctionWindow.ui',
-            14: 'ellipseFunctionWindow.ui',
-            15: 'nesterovFunctionWindow.ui',
-            16: 'saddleFunctionWindow.ui',
+            0: 'UI/ackleyFunctionWindow.ui',
+            1: 'UI/DixonPriceFunctionWindow.ui',
+            2: 'UI/GriewankFunctionWindow.ui',
+            3: 'UI/MichalewiczFunctionWindow.ui',
+            4: 'UI/PermFunctionWindow.ui',
+            5: 'UI/PowellFunctionWindow.ui',
+            6: 'UI/PowerSumFunctionWindow.ui',
+            7: 'UI/rastriginFunctionWindow.ui',
+            8: 'UI/rosenbrockFunctionWindow.ui',
+            9: 'UI/schwefelFunctionWindow.ui',
+            10: 'UI/sphereFunctionWindow.ui',
+            11: 'UI/sum2FunctionWindow.ui',
+            12: 'UI/tridFunctionWindow.ui',
+            13: 'UI/zakharovFunctionWindow.ui',
+            14: 'UI/ellipseFunctionWindow.ui',
+            15: 'UI/nesterovFunctionWindow.ui',
+            16: 'UI/saddleFunctionWindow.ui',
             17: ''
         }
         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
@@ -146,7 +146,7 @@ class MatplotlibWidget(QMainWindow):
             if  isSMA:
                 #SMA
                 self.window = PyQt5.QtWidgets.QMainWindow()
-                loadUi('SMA_Inputs.ui', self.window)
+                loadUi('UI/SMA_Inputs.ui', self.window)
                 self.window.show()
                 self.window.smaButton.clicked.connect(lambda: self.SMAInputOkButton(input))
                 #Set predefined values
@@ -159,7 +159,7 @@ class MatplotlibWidget(QMainWindow):
             else:
                 #Other Optimizations
                 self.window = PyQt5.QtWidgets.QMainWindow()
-                loadUi('Inputs.ui', self.window)
+                loadUi('UI/Inputs.ui', self.window)
                 self.window.show()
                 self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
                 #Set predefined values
