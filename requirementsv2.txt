@@ -1,0 +1,9 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+pyqt5
+pyqt5-qt5
+pyqt5-sip
+matplotlib
+matplotlib-inline
+sklearn
