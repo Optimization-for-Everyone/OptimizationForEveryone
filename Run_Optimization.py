@@ -53,7 +53,6 @@ def Run_SMA(functionIndex,problem_size,verbose,epoch,pop_size,_lb,_ub):
         obj_func=functions.selectFunction(functionIndex)
         md1 = BaseSMA(obj_func, lb, ub, problem_size, verbose, epoch, pop_size)
         best_pos1, best_fit1, list_loss1, sol1, sol2 = md1.train()
-        sol=numpy.array(sol2.convergence)
         # return : the global best solution, the fitness of global best solution and the loss of training process in each epoch/iteration
         print(md1.solution[0])
         print(md1.solution[1])

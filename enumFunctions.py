@@ -1,6 +1,6 @@
 import enum
 
-class Optimizations(enum.Enum):
+class Functions(enum.Enum):
     ackley = 0
     dixonprice = 1
     griewank = 2
@@ -18,3 +18,4 @@ class Optimizations(enum.Enum):
     ellipse = 14
     nesterov = 15
     saddle = 16
+    custom = 17

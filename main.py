@@ -114,7 +114,7 @@ class MatplotlibWidget(QMainWindow):
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
-            functionName = enumFunctions.Optimizations(self.functionComboBox.currentIndex())
+            functionName = enumFunctions.Functions(self.functionComboBox.currentIndex())
             WriteOperations(opt.name,functionName.name,sol).write()
             
         elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :

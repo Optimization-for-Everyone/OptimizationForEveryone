@@ -42,7 +42,7 @@ from numpy import abs, zeros, log10, where, arctanh, tanh
 from root import Root
 import numpy as np
 import solution
-
+import time
 
 class BaseSMA(Root):
     """
@@ -67,10 +67,13 @@ class BaseSMA(Root):
         return [pos, fit, weight]
 
     def train(self):
-        sol1 = solution.solution()
         sol = np.zeros(self.epoch)
         pop = [self.create_solution() for _ in range(self.pop_size)]
         pop, g_best = self.get_sorted_pop_and_global_best_solution(pop, self.ID_FIT, self.ID_MIN_PROB)      # Eq.(2.6)
+        
+        sol1 = solution.solution()
+        timerStart = time.time()
+        sol1.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
 
         for epoch in range(self.epoch):
 
@@ -116,9 +119,17 @@ class BaseSMA(Root):
                 print("> Epoch: {}, Best fit: {}".format(epoch + 1, g_best[self.ID_FIT]))
                 sol[epoch] = g_best[self.ID_FIT]
                 #sol.append([epoch,g_best[self.ID_FIT]])
+        timerEnd = time.time()
         self.solution = g_best
         sol1.bestIndividual = g_best[self.ID_POS]
         sol1.convergence = sol
+        sol1.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
+        sol1.executionTime = timerEnd - timerStart
+        sol1.convergence = sol
+        sol1.optimizer = "SMA"
+        sol1.objfname = self.obj_func.__name__
+        sol1.best = g_best[self.ID_FIT]
+
         return g_best[self.ID_POS], g_best[self.ID_FIT], self.loss_train, sol, sol1
 
 
