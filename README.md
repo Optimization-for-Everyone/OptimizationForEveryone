@@ -10,7 +10,7 @@
 * We suggest you to use an environment management system such as conda, venv, etc...
 * Clone the code from
 ```
-git clone https://github.com/Tlamir/OptimizationForEveryone.git
+git clone https://github.com/Optimization-for-Everyone/OptimizationForEveryone.git
 ```
 * Install packages using script below. pip must be installed in your environment to execute this script.
 ```
