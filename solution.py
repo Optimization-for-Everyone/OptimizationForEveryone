@@ -15,3 +15,4 @@ class solution:
         self.maxiers=0
         self.result = [[None,None]]
         self.ga = None
+        self.totalNoEvaluation = 0
