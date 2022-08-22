@@ -90,7 +90,7 @@ class MatplotlibWidget(QMainWindow):
             self.window = PyQt5.QtWidgets.QMainWindow()
             loadUi(infowindow, self.window)           
         self.window.show()
-        self.window.okButton.clicked.connect(self.AckleyInfoOkButton)          
+        self.window.okButton.clicked.connect(self.CloseUI)          
 
     def Plot(self,sol):
         opt = Optimizations(self.optimizationComboBox.currentIndex())
@@ -148,26 +148,40 @@ class MatplotlibWidget(QMainWindow):
                 self.window = PyQt5.QtWidgets.QMainWindow()
                 loadUi('UI/SMA_Inputs.ui', self.window)
                 self.window.show()
-                self.window.smaButton.clicked.connect(lambda: self.SMAInputOkButton(input))
-                #Set predefined values
+                self.window.smaButton.clicked.connect(lambda: self.CloseUI())
+                #Set predefined values & Set inputs
                 self.window.problemSizeTextBox.setText(str(self.inputs[input+3].problem_size))
                 self.window.verboseCheckBox.setChecked(self.inputs[input+3].verbose)
                 self.window.epochTextBox.setText(str(self.inputs[input+3].epoch))
                 self.window.popSizeTextBox.setText(str(self.inputs[input+3].pop_size))
                 self.window.lbTextBox.setText(str(self.inputs[input+3].smalb))
                 self.window.ubTextBox.setText(str(self.inputs[input+3].smaub))
+                #Subscribe textboxes to textchange event
+                self.window.problemSizeTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.verboseCheckBox.isChecked().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.epochTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.popSizeTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.lbTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.ubTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
             else:
                 #Other Optimizations
                 self.window = PyQt5.QtWidgets.QMainWindow()
                 loadUi('UI/Inputs.ui', self.window)
                 self.window.show()
-                self.window.hhoButton.clicked.connect(lambda: self.HHOInputOkButton(input))
-                #Set predefined values
+                self.window.hhoButton.clicked.connect(lambda: self.CloseUI())
+                #Set predefined values & Set inputs
                 self.window.maxIterationTextBox.setText(str(self.inputs[input].MaxIter))
                 self.window.dimensionTextBox.setText(str(self.inputs[input].dimension))
                 self.window.searchAgentsTextBox.setText(str(self.inputs[input].searchAgentsNo))
                 self.window.lbTextBox.setText(str(self.inputs[input].lb))
-                self.window.ubTextBox.setText(str(self.inputs[input].ub))
+                self.window.ubTextBox.setText(str(self.inputs[input].ub))               
+                #Subscribe textboxes to textchange event
+                self.window.maxIterationTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
+                self.window.dimensionTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
+                self.window.searchAgentsTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
+                self.window.lbTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
+                self.window.ubTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
+               
     def InputButton1(self):
         isSMA = self.optimizationComboBox.currentIndex()==12
         self.InputButton(isSMA,0)
@@ -184,28 +198,25 @@ class MatplotlibWidget(QMainWindow):
 
             
     #HHO input window    
-    def HHOInputOkButton(self,inputNumber):
+    def UpdateInputsOther(self,inputNumber):
         self.inputs[inputNumber].MaxIter=self.window.maxIterationTextBox.toPlainText()
         self.inputs[inputNumber].dimension=self.window.dimensionTextBox.toPlainText()
         self.inputs[inputNumber].searchAgentsNo=self.window.searchAgentsTextBox.toPlainText()
         self.inputs[inputNumber].lb=self.window.lbTextBox.toPlainText()
-        self.inputs[inputNumber].ub=self.window.ubTextBox.toPlainText()
-        self.window.close()
-    def SMAInputOkButton(self,inputNumber):
+        self.inputs[inputNumber].ub=self.window.ubTextBox.toPlainText()     
+    def UpdateInputsSMA(self,inputNumber):
         self.inputs[inputNumber+3].problem_size=self.window.problemSizeTextBox.toPlainText()
         self.inputs[inputNumber+3].verbose=self.window.verboseCheckBox.isChecked()
         self.inputs[inputNumber+3].epoch=self.window.epochTextBox.toPlainText()
         self.inputs[inputNumber+3].pop_size=self.window.popSizeTextBox.toPlainText()
         self.inputs[inputNumber+3].smalb=self.window.lbTextBox.toPlainText()
         self.inputs[inputNumber+3].smaub=self.window.ubTextBox.toPlainText()
-        self.window.close()
+    def CloseUI(self):
+        self.window.close()    
     #SMA InpuWindow
     #=================
     #=================
     #=================
-    #Info Ok Buttons
-    def AckleyInfoOkButton(self):        
-        self.window.close()
     
 def AddItemsToComboBox(self):
          #Add items to functions combo Box
