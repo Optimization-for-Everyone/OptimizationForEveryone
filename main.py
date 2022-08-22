@@ -157,12 +157,12 @@ class MatplotlibWidget(QMainWindow):
                 self.window.lbTextBox.setText(str(self.inputs[input+3].smalb))
                 self.window.ubTextBox.setText(str(self.inputs[input+3].smaub))
                 #Subscribe textboxes to textchange event
-                self.window.problemSizeTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
-                self.window.verboseCheckBox.isChecked().textChanged.connect(lambda: self.UpdateInputsSMA(input))
-                self.window.epochTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
-                self.window.popSizeTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
-                self.window.lbTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
-                self.window.ubTextBox.toPlainText().textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.problemSizeTextBox.textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.verboseCheckBox.stateChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.epochTextBox.textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.popSizeTextBox.textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.lbTextBox.textChanged.connect(lambda: self.UpdateInputsSMA(input))
+                self.window.ubTextBox.textChanged.connect(lambda: self.UpdateInputsSMA(input))
             else:
                 #Other Optimizations
                 self.window = PyQt5.QtWidgets.QMainWindow()
