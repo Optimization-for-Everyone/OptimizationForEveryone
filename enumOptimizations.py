@@ -1,6 +1,6 @@
 import enum
 
-class Optimizations(enum.Enum):
+class Optimizations(enum.IntEnum):
     BAT = 0
     CS = 1
     DE = 2

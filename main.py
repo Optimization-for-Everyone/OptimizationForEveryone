@@ -15,7 +15,7 @@ import OptimizationInputs
 from enumOptimizations import Optimizations
 from solution import solution
 from write_operations import WriteOperations
-import enumFunctions
+from enumFunctions import Functions
 
 class MatplotlibWidget(QMainWindow):
     inputs = [] 
@@ -53,7 +53,7 @@ class MatplotlibWidget(QMainWindow):
         self.addToolBar(NavigationToolbar(self.MplWidget.canvas, self))
 
     def CustomFunctionSelected(self):
-         if self.functionComboBox.currentIndex()==17:
+         if self.functionComboBox.currentIndex()==Functions.custom:
             self.functionTextbox.setVisible(True)
             self.functionLabel.setVisible(True)
          else: 
@@ -84,7 +84,7 @@ class MatplotlibWidget(QMainWindow):
         }
         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
 
-        if self.functionComboBox.currentIndex()==17 : #Check if custom selected   
+        if self.functionComboBox.currentIndex()==Functions : #Check if custom selected   
             return
         else: 
             self.window = PyQt5.QtWidgets.QMainWindow()
@@ -107,24 +107,24 @@ class MatplotlibWidget(QMainWindow):
         paramSMA2 = self.functionComboBox.currentIndex(), int(self.inputs[4].problem_size), self.inputs[4].verbose,int(self.inputs[4].epoch),int(self.inputs[4].pop_size),int(self.inputs[4].smalb),int(self.inputs[4].smaub)
         paramSMA3 = self.functionComboBox.currentIndex(), int(self.inputs[5].problem_size), self.inputs[5].verbose,int(self.inputs[5].epoch),int(self.inputs[5].pop_size),int(self.inputs[5].smalb),int(self.inputs[5].smaub)
 
-        if self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()==15 :
+        if self.optimizationComboBox_2.currentIndex()==Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
             #Run single
             opt = Optimizations(self.optimizationComboBox.currentIndex())
             sol = Run_Optimization.Single(opt,param1,paramSMA1)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
-            functionName = enumFunctions.Functions(self.functionComboBox.currentIndex())
+            functionName = Functions(self.functionComboBox.currentIndex())
             WriteOperations(opt.name,functionName.name,sol).write()
             
-        elif self.optimizationComboBox_2.currentIndex()!=15 and self.optimizationComboBox_3.currentIndex()==15 :
+        elif self.optimizationComboBox_2.currentIndex()!=Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
             #Run double first and second
             sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2)
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
-        elif self.optimizationComboBox_2.currentIndex()==15 and self.optimizationComboBox_3.currentIndex()!=15 :     
+        elif self.optimizationComboBox_2.currentIndex()==Optimizations.NONE and self.optimizationComboBox_3.currentIndex()!=Optimizations.NONE :     
             # run double first and third
             sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2)
             self.MplWidget.canvas.axes.clear()
@@ -183,17 +183,17 @@ class MatplotlibWidget(QMainWindow):
                 self.window.ubTextBox.textChanged.connect(lambda: self.UpdateInputsOther(input))
                
     def InputButton1(self):
-        isSMA = self.optimizationComboBox.currentIndex()==12
+        isSMA = self.optimizationComboBox.currentIndex()==Optimizations.SMA
         self.InputButton(isSMA,0)
     def InputButton2(self):
         if self.optimizationComboBox_2.currentText()=="None" :
             return
-        isSMA = self.optimizationComboBox_2.currentIndex()==12
+        isSMA = self.optimizationComboBox_2.currentIndex()==Optimizations.SMA
         self.InputButton(isSMA,1)
     def InputButton3(self):
         if self.optimizationComboBox_3.currentText()=="None" :
             return
-        isSMA = self.optimizationComboBox_3.currentIndex()==12
+        isSMA = self.optimizationComboBox_3.currentIndex()==Optimizations.SMA
         self.InputButton(isSMA,2)        
 
             
@@ -246,11 +246,11 @@ def AddItemsToComboBox(self):
             elif x==1:
                 AddToOptimizationCombobox(self.optimizationComboBox_2)
                 self.optimizationComboBox_2.addItem('None')
-                self.optimizationComboBox_2.setCurrentIndex(15)
+                self.optimizationComboBox_2.setCurrentIndex(Optimizations.NONE)
             elif x==2:
                 AddToOptimizationCombobox(self.optimizationComboBox_3)
                 self.optimizationComboBox_3.addItem('None')
-                self.optimizationComboBox_3.setCurrentIndex(15)
+                self.optimizationComboBox_3.setCurrentIndex(Optimizations.NONE)
                 
         
 

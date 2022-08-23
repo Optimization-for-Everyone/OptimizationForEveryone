@@ -1,6 +1,6 @@
 import enum
 
-class Functions(enum.Enum):
+class Functions(enum.IntEnum):
     ackley = 0
     dixonprice = 1
     griewank = 2
