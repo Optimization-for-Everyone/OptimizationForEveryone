@@ -54,9 +54,9 @@ def Run_SMA(functionIndex,problem_size,verbose,epoch,pop_size,_lb,_ub):
         md1 = BaseSMA(obj_func, lb, ub, problem_size, verbose, epoch, pop_size)
         best_pos1, best_fit1, list_loss1, sol1, sol2 = md1.train()
         # return : the global best solution, the fitness of global best solution and the loss of training process in each epoch/iteration
-        print(md1.solution[0])
-        print(md1.solution[1])
-        print(md1.loss_train)
+        #print(md1.solution[0])
+        #print(md1.solution[1])
+        #print(md1.loss_train)
         return sol2
 def Run_GA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         lb = [_lb]

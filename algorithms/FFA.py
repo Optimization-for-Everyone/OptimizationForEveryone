@@ -124,7 +124,7 @@ def FFA(objf, lb, ub, dim, n, MaxGeneration):
 
         if k % 1 == 0:
             print(
-                ["At iteration " + str(k) + " the best fitness is " + str(BestQuality)]
+                ["At iteration " + str(k+1) + " the best fitness is " + str(BestQuality)]
             )
     #
     ####################### End main loop

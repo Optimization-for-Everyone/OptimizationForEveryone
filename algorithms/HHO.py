@@ -178,7 +178,7 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
             print(
                 [
                     "At iteration "
-                    + str(t)
+                    + str(t+1)
                     + " the best fitness is "
                     + str(Rabbit_Energy)
                 ]

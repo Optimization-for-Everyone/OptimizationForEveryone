@@ -104,7 +104,7 @@ def JAYA(objf, lb, ub, dim, SearchAgents_no, Max_iter):
 
         if l % 1 == 0:
             print(
-                ["At iteration " + str(l) + " the best fitness is " + str(Best_score)]
+                ["At iteration " + str(l+1) + " the best fitness is " + str(Best_score)]
             )
 
     timerEnd = time.time()

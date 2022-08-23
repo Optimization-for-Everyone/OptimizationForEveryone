@@ -75,6 +75,8 @@ class BaseSMA(Root):
         timerStart = time.time()
         sol1.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
 
+        print('SMA is optimizing  "' + self.obj_func.__name__ + '"')
+
         for epoch in range(self.epoch):
 
             s = pop[0][self.ID_FIT] - pop[-1][self.ID_FIT] + self.EPSILON  # plus eps to avoid denominator zero

@@ -104,7 +104,7 @@ def SSA(objf, lb, ub, dim, N, Max_iteration):
             print(
                 [
                     "At iteration "
-                    + str(Iteration)
+                    + str(Iteration + 1)
                     + " the best fitness is "
                     + str(FoodFitness)
                 ]

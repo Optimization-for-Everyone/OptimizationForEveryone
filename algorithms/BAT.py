@@ -97,7 +97,7 @@ def BAT(objf, lb, ub, dim, N, Max_iteration):
         Convergence_curve.append(fmin)
 
         if t % 1 == 0:
-            print(["At iteration " + str(t) + " the best fitness is " + str(fmin)])
+            print(["At iteration " + str(t+1) + " the best fitness is " + str(fmin)])
 
     timerEnd = time.time()
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")

@@ -143,7 +143,7 @@ def CS(objf, lb, ub, dim, n, N_IterTotal):
             bestnest = best
 
         
-        print(["At iteration " + str(iter) + " the best fitness is " + str(fmin)])
+        print(["At iteration " + str(iter+1) + " the best fitness is " + str(fmin)])
         convergence.append(fmin)
 
     timerEnd = time.time()
