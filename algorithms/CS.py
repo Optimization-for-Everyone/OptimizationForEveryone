@@ -152,5 +152,7 @@ def CS(objf, lb, ub, dim, n, N_IterTotal):
     s.convergence = convergence
     s.optimizer = "CS"
     s.objfname = objf.__name__
+    s.best = fmin
+    s.bestIndividual = bestnest
 
     return s
