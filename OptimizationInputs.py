@@ -6,9 +6,9 @@ class OptimizationStructure:
     ub = 32768
 
 class OptimizationSMAStructure:
-    smalb = -100
-    smaub = 100
-    problem_size = 100       
+    smalb = -32768
+    smaub = 32768
+    problem_size = 30       
     verbose = True
     epoch = 10
     pop_size = 50
