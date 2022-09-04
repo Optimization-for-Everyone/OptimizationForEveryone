@@ -134,5 +134,7 @@ def FFA(objf, lb, ub, dim, n, MaxGeneration):
     s.convergence = convergence
     s.optimizer = "FFA"
     s.objfname = objf.__name__
+    s.best = BestQuality
+    s.bestIndividual = nbest
 
     return s
