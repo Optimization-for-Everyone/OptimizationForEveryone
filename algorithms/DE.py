@@ -118,6 +118,7 @@ def DE(objf, lb, ub, dim, PopSize, iters):
         s.convergence = convergence_curve
         s.optimizer = "DE"
         s.objfname = objf.__name__
+        s.bestIndividual = s.leader_solution
 
     # return solution
     return s
