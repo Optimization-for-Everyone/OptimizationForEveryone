@@ -11,6 +11,7 @@ from functions import custom
 import Run_Optimization
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
 import OptimizationInputs
+from multipleRun import MultipleRun
 #Optimization Algorthms
 from enumOptimizations import Optimizations
 from solution import solution
@@ -43,6 +44,8 @@ class MatplotlibWidget(QMainWindow):
         self.inputButton.clicked.connect(self.InputButton1)
         self.inputButton_2.clicked.connect(self.InputButton2)
         self.inputButton_3.clicked.connect(self.InputButton3)
+        #Fill the multi run textbox
+        self.multiRunTextBox.setText("1")
 
         self.functionComboBox.currentIndexChanged.connect(self.CustomFunctionSelected)
         self.functionTextbox.setVisible(False)
@@ -108,32 +111,31 @@ class MatplotlibWidget(QMainWindow):
         paramSMA3 = self.functionComboBox.currentIndex(), int(self.inputs[5].problem_size), self.inputs[5].verbose,int(self.inputs[5].epoch),int(self.inputs[5].pop_size),int(self.inputs[5].smalb),int(self.inputs[5].smaub)
 
         if self.optimizationComboBox_2.currentIndex()==Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
-            #Run single
+            #Run single algorithm
             opt = Optimizations(self.optimizationComboBox.currentIndex())
-            sol = Run_Optimization.Single(opt,param1,paramSMA1)
+            sol = MultipleRun(opt,param1,paramSMA1,int(self.multiRunTextBox.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
             functionName = Functions(self.functionComboBox.currentIndex())
-            WriteOperations(opt.name,functionName.name,sol).write()
-            
+            WriteOperations(opt.name,functionName.name,sol).write()        
         elif self.optimizationComboBox_2.currentIndex()!=Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
-            #Run double first and second
-            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2)
+            #Run double first and second algorithm
+            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
         elif self.optimizationComboBox_2.currentIndex()==Optimizations.NONE and self.optimizationComboBox_3.currentIndex()!=Optimizations.NONE :     
-            # run double first and third
-            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2)
+            #Run double first and third algorithm
+            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, opt3.name),loc='upper right')
         else:
-            #run all
-            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1,paramSMA2,paramSMA3)
+            #Run all algorithms
+            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1,paramSMA2,paramSMA3,int(self.multiRunTextBox.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
@@ -195,8 +197,7 @@ class MatplotlibWidget(QMainWindow):
             return
         isSMA = self.optimizationComboBox_3.currentIndex()==Optimizations.SMA
         self.InputButton(isSMA,2)        
-
-            
+     
     #HHO input window    
     def UpdateInputsOther(self,inputNumber):
         self.inputs[inputNumber].MaxIter=self.window.maxIterationTextBox.toPlainText()

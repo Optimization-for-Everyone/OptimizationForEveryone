@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1039</width>
-    <height>866</height>
+    <width>1032</width>
+    <height>913</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>760</y>
-      <width>121</width>
+      <x>420</x>
+      <y>800</y>
+      <width>181</width>
       <height>51</height>
      </rect>
     </property>
@@ -35,7 +35,7 @@
    <widget class="MplWidget" name="MplWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>90</x>
       <y>220</y>
       <width>851</width>
       <height>531</height>
@@ -76,7 +76,7 @@
    <widget class="QLabel" name="TitleLabel">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>350</x>
       <y>0</y>
       <width>351</width>
       <height>61</height>
@@ -266,13 +266,45 @@
      <string>Enter Inputs</string>
     </property>
    </widget>
+   <widget class="QTextEdit" name="multiRunTextBox">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>770</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="acceptDrops">
+     <bool>false</bool>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>770</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
+    <property name="text">
+     <string>Number Of Runs</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1039</width>
+     <width>1032</width>
      <height>21</height>
     </rect>
    </property>

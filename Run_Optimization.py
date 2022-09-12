@@ -28,16 +28,34 @@ def Single(opt, params, sma):
     sol = func()
     return sol
 
-def Triple(opt1, opt2, opt3, param1,param2,param3, sma1,sma2,sma3):
-    sol1 = Single(opt1, param1, sma1)
-    sol2 = Single(opt2, param2, sma2)
-    sol3 = Single(opt3, param3, sma3)
+def Triple(opt1, opt2, opt3, param1,param2,param3, sma1,sma2,sma3,numberOfRuns):
+    sol1 = MultipleRun(opt1,param1,sma1,numberOfRuns)
+    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns)
+    sol3 = MultipleRun(opt3,param3,sma3,numberOfRuns)
     return sol1, sol2, sol3
 
-def Double(opt1, opt2, param1,param2, sma1, sma2):
-    sol1 = Single(opt1, param1, sma1)
-    sol2 = Single(opt2, param2, sma2)
+def Double(opt1, opt2, param1,param2, sma1, sma2,numberOfRuns):
+    sol1 = MultipleRun(opt1,param1,sma1,numberOfRuns)
+    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns)
     return sol1, sol2
+
+def MultipleRun(opt, params, sma, number):
+    if number=='':
+       number=1
+    outputs = numpy.array([], dtype='float64')
+    for i in range(number):
+        sol = Single(opt, params, sma)
+        output = sol.best
+        outputs = numpy.append(outputs,output)
+    
+    bestfitnessMean = numpy.mean(outputs)
+    bestfitnessStd = numpy.std(outputs)
+
+    print("outputs:")
+    print(outputs)
+    print("mean:", bestfitnessMean)
+    print("std:", bestfitnessStd)
+    return sol 
 
 def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         #lb=TextBox_lb.text
