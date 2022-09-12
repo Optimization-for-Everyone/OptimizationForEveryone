@@ -14,7 +14,7 @@ git clone https://github.com/Optimization-for-Everyone/OptimizationForEveryone.g
 ```
 * Install packages using script below. pip must be installed in your environment to execute this script.
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 * Run the the script below on the terminal
 ```
