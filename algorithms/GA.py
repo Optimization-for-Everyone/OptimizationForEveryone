@@ -433,6 +433,7 @@ def GA(objf, lb, ub, dim, popSize, iters):
     s.bestIndividual = bestIndividual
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
+    s.best = bestScore
     s.convergence = convergence_curve
     s.optimizer = "GA"
     s.objfname = objf.__name__
