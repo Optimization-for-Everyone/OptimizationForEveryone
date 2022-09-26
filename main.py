@@ -121,21 +121,21 @@ class MatplotlibWidget(QMainWindow):
             WriteOperations(opt.name,functionName.name,sol).write()        
         elif self.optimizationComboBox_2.currentIndex()!=Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
             #Run double first and second algorithm
-            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()))
+            sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()),int(self.multiRunTextBox_2.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, opt2.name),loc='upper right')
         elif self.optimizationComboBox_2.currentIndex()==Optimizations.NONE and self.optimizationComboBox_3.currentIndex()!=Optimizations.NONE :     
             #Run double first and third algorithm
-            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()))
+            sol, sol2 = Run_Optimization.Double(opt, opt3,param1,param3,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()),int(self.multiRunTextBox_3.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, opt3.name),loc='upper right')
         else:
             #Run all algorithms
-            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1,paramSMA2,paramSMA3,int(self.multiRunTextBox.toPlainText()))
+            sol, sol2, sol3 = Run_Optimization.Triple(opt, opt2,opt3,param1,param2,param3,paramSMA1,paramSMA2,paramSMA3,int(self.multiRunTextBox.toPlainText()),int(self.multiRunTextBox_2.toPlainText()),int(self.multiRunTextBox_3.toPlainText()))
             self.MplWidget.canvas.axes.clear()
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.plot(sol2.convergence)

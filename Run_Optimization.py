@@ -28,15 +28,15 @@ def Single(opt, params, sma):
     sol = func()
     return sol
 
-def Triple(opt1, opt2, opt3, param1,param2,param3, sma1,sma2,sma3,numberOfRuns):
+def Triple(opt1, opt2, opt3, param1,param2,param3, sma1,sma2,sma3,numberOfRuns,numberOfRuns2,numberOfRuns3):
     sol1 = MultipleRun(opt1,param1,sma1,numberOfRuns)
-    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns)
-    sol3 = MultipleRun(opt3,param3,sma3,numberOfRuns)
+    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns2)
+    sol3 = MultipleRun(opt3,param3,sma3,numberOfRuns3)
     return sol1, sol2, sol3
 
-def Double(opt1, opt2, param1,param2, sma1, sma2,numberOfRuns):
+def Double(opt1, opt2, param1,param2, sma1, sma2,numberOfRuns,numberOfRuns2):
     sol1 = MultipleRun(opt1,param1,sma1,numberOfRuns)
-    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns)
+    sol2 = MultipleRun(opt2,param2,sma2,numberOfRuns2)
     return sol1, sol2
 
 def MultipleRun(opt, params, sma, number):
