@@ -5,6 +5,7 @@ from algorithms.SMA import BaseSMA
 from algorithms.HHO import HHO
 from solution import solution
 from enumOptimizations import Optimizations
+import sys
 
 def Single(opt, params, sma):
     switcher = {
@@ -40,12 +41,18 @@ def Double(opt1, opt2, param1,param2, sma1, sma2,numberOfRuns,numberOfRuns2):
     return sol1, sol2
 
 def MultipleRun(opt, params, sma, number):
-    if number=='':
+    if number <= 0:
        number=1
+    
+    min = sys.float_info.max
+    best_sol = solution()
     outputs = numpy.array([], dtype='float64')
     for i in range(number):
         sol = Single(opt, params, sma)
         output = sol.best
+        if output <= min:
+             min = output
+             best_sol = sol
         outputs = numpy.append(outputs,output)
     
     bestfitnessMean = numpy.mean(outputs)
@@ -55,7 +62,7 @@ def MultipleRun(opt, params, sma, number):
     print(outputs)
     print("mean:", bestfitnessMean)
     print("std:", bestfitnessStd)
-    return sol 
+    return best_sol 
 
 def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         #lb=TextBox_lb.text
