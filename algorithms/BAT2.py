@@ -47,7 +47,7 @@ class BatAlgorithm():
                 rnd = np.random.uniform(0, 1)
                 self.v[i][j] = 0.0
                 self.Sol[i][j] = self.Lb[j] + (self.Ub[j] - self.Lb[j]) * rnd
-            self.Fitness[i] = self.Fun(self.D, self.Sol[i])
+            self.Fitness[i] = self.Fun(self.Sol[i])
         self.best_bat()
 
     def simplebounds(self, val, lower, upper):
@@ -82,7 +82,7 @@ class BatAlgorithm():
                         S[i][j] = self.simplebounds(S[i][j], self.Lb[j],
                                                 self.Ub[j])
                         
-                Fnew = self.Fun(self.D, S[i])
+                Fnew = self.Fun(S[i])
 
                 rnd = np.random.random_sample()
 

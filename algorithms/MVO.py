@@ -158,6 +158,7 @@ def MVO(objf, lb, ub, dim, N, Max_time):
 
         Time = Time + 1
     timerEnd = time.time()
+    s.best = Best_universe_Inflation_rate
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
     s.convergence = convergence

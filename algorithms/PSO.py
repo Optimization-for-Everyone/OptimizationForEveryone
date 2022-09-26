@@ -100,6 +100,7 @@ def PSO(objf, lb, ub, dim, PopSize, iters):
                 ]
             )
     timerEnd = time.time()
+    s.best = gBestScore
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
     s.convergence = convergence_curve

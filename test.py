@@ -31,10 +31,10 @@ class Test:
         MultipleRun(self.opt, self.params, self.sma, number = 5)
 
     def RunBAT2(self):
-        obj_func = functions.selectFunction(Functions.ackley)
+        obj_func = functions.selectFunction(Functions.schwefel)
 
         # D = Dimension, NP = Population size, N_Gen = Number of Generation
-        bat = BatAlgorithm(obj_func,Lower=-32768,Upper=32768,D=30,NP=1000,N_Gen = 200) 
+        bat = BatAlgorithm(obj_func,Lower=-500,Upper=500,D=30,NP=1000,N_Gen = 200) 
 
         bat.move_bat()
     
@@ -60,18 +60,17 @@ def main():
 
     #-----------BAT 2 TESTING START-----------#
 
-    #test.RunBAT2()
+    test.RunBAT2()
 
     #-----------BAT 2 TESTING END-----------#
 
     #-----------FFA 2 TESTING START-----------#
 
-    test.RunFFA2()
+    #test.RunFFA2()
 
     #-----------FFA 2 TESTING END-------------#
-    
 
-    
+
 
 
 if __name__ == "__main__":

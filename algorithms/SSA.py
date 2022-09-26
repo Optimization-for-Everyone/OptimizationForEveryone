@@ -115,6 +115,7 @@ def SSA(objf, lb, ub, dim, N, Max_iteration):
         Iteration = Iteration + 1
 
     timerEnd = time.time()
+    s.best = FoodFitness
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
     s.convergence = Convergence_curve

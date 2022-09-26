@@ -83,6 +83,7 @@ def SCA(objf, lb, ub, dim, SearchAgents_no, Max_iter):
             )
 
     timerEnd = time.time()
+    s.best = Dest_score
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     s.executionTime = timerEnd - timerStart
     s.convergence = Convergence_curve
