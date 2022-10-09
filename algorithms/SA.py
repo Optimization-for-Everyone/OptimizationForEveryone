@@ -79,6 +79,6 @@ def simulated_annealing(min_values = [-5,-5], max_values = [5,5], mu = 0, sigma 
                 fx_best = fx_new
                 best    = np.copy(guess)
         Temperature = alpha*Temperature   
-    return best
+        return best
     
 ############################################################################
