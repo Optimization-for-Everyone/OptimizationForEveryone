@@ -1,11 +1,14 @@
-import numpy
-import functions
 from algorithms import HHO,BAT,CS,DE,FFA,GWO,JAYA,MFO,MVO,PSO,SCA,SSA,WOA,GA
 from algorithms.SMA import BaseSMA
 from algorithms.HHO import HHO
 from solution import solution
 from enumOptimizations import Optimizations
+from write_operations import WriteOperations
+from enumFunctions import Functions
+import functions
 import sys
+import numpy
+
 
 def Single(opt, params, sma):
     switcher = {
@@ -42,7 +45,7 @@ def Double(opt1, opt2, param1,param2, sma1, sma2,numberOfRuns,numberOfRuns2):
 
 def MultipleRun(opt, params, sma, number):
     if number <= 0:
-       number=1
+       number = 1
     
     min = sys.float_info.max
     best_sol = solution()
@@ -50,6 +53,7 @@ def MultipleRun(opt, params, sma, number):
     for i in range(number):
         sol = Single(opt, params, sma)
         output = sol.best
+        
         if output <= min:
              min = output
              best_sol = sol
@@ -57,11 +61,13 @@ def MultipleRun(opt, params, sma, number):
     
     bestfitnessMean = numpy.mean(outputs)
     bestfitnessStd = numpy.std(outputs)
+    multiple_run_result = [outputs, bestfitnessMean, bestfitnessStd]
 
-    print("outputs:")
-    print(outputs)
-    print("mean:", bestfitnessMean)
-    print("std:", bestfitnessStd)
+
+
+    WriteOperations(optimizationName = opt.name, fuctionName = Functions(params[0]).name,
+        solution = best_sol, multipleRun = number, multiple_run_result = multiple_run_result).write()
+
     return best_sol 
 
 def Run_HHO(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):

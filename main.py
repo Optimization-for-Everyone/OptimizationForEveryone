@@ -118,7 +118,7 @@ class MatplotlibWidget(QMainWindow):
             self.MplWidget.canvas.axes.plot(sol.convergence)
             self.MplWidget.canvas.axes.legend((opt.name, 'Best fitness'),loc='upper right')
             functionName = Functions(self.functionComboBox.currentIndex())
-            WriteOperations(opt.name,functionName.name,sol).write()        
+            #WriteOperations(opt.name,functionName.name,sol).write()        
         elif self.optimizationComboBox_2.currentIndex()!=Optimizations.NONE and self.optimizationComboBox_3.currentIndex()==Optimizations.NONE :
             #Run double first and second algorithm
             sol, sol2 = Run_Optimization.Double(opt, opt2,param1,param2,paramSMA1,paramSMA2,int(self.multiRunTextBox.toPlainText()),int(self.multiRunTextBox_2.toPlainText()))

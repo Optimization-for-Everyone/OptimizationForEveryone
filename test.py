@@ -5,6 +5,7 @@ from enumOptimizations import Optimizations
 from multipleRun import MultipleRun
 from algorithms.BAT2 import BatAlgorithm
 from algorithms.FFA2 import FireflyAlgorithm
+from algorithms.SA import simulated_annealing 
 import functions
 
 
@@ -44,6 +45,12 @@ class Test:
         ffa = FireflyAlgorithm()
 
         ffa.run(obj_func, dim = 30, lb=-32768, ub=32768, max_evals=200)
+    
+    def SimulatedAnnealing(self):
+        obj_func = functions.selectFunction(Functions.schwefel)
+        # dim array size, -5 lb +5 lb 
+        simulated_annealing( min_values = [-500,-500,-500,-500,-500,-500,-500,-500,-500], max_values = [500,500,500,500,500,500,500,500,500], mu = 0, sigma = 1, initial_temperature = 1.0, temperature_iterations = 100,
+            final_temperature = 0.0001, alpha = 0.9, target_function = obj_func, verbose = True)
 
 
 
@@ -60,7 +67,7 @@ def main():
 
     #-----------BAT 2 TESTING START-----------#
 
-    test.RunBAT2()
+    #test.RunBAT2()
 
     #-----------BAT 2 TESTING END-----------#
 
@@ -69,6 +76,8 @@ def main():
     #test.RunFFA2()
 
     #-----------FFA 2 TESTING END-------------#
+
+    test.SimulatedAnnealing()
 
 
 

@@ -4,10 +4,12 @@ import numpy
 from solution import solution
 class WriteOperations():
 
-    def __init__(self, optimizationName, fuctionName, solution):
+    def __init__(self, optimizationName, fuctionName, solution, multipleRun = 1, multiple_run_result = []):
         self.fuctionName = fuctionName
         self.optimizationName = optimizationName
         self.solution = solution
+        self.multipleRun = multipleRun
+        self.multiple_run_result = multiple_run_result
         time = str(datetime.datetime.now())
         time = time.replace(" ", "_")
         time = time.replace(":", "_")
@@ -24,6 +26,19 @@ class WriteOperations():
         file.write("Best: "+ str(self.solution.best) + "\n")
         file.write("BestIndividual:\n")
         file.write(str(numpy.array(self.solution.bestIndividual)))
+
+        if(self.multipleRun > 1):
+            
+            file.write("\n")
+            file.write("\n")
+            file.write("\n")
+
+            file.write("-- Multiple Run Result ---\n")
+            file.write("Outputs:\n")
+            file.write(str(self.multiple_run_result[0]) + "\n")
+            file.write("Mean:\n" + str(self.multiple_run_result[1]) + "\n")
+            file.write("Std:\n" + str(self.multiple_run_result[2]))
+
         file.close()
         
 
