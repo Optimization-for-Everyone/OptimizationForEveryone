@@ -17,6 +17,7 @@ from enumOptimizations import Optimizations
 from solution import solution
 from write_operations import WriteOperations
 from enumFunctions import Functions
+from PyQt5 import QtGui
 
 class MatplotlibWidget(QMainWindow):
     inputs = [] 
@@ -34,7 +35,9 @@ class MatplotlibWidget(QMainWindow):
 
         loadUi("UI/qt_designer.ui",self)
         AddItemsToComboBox(self)
+        self.setWindowIcon(QtGui.QIcon('UI/graph.png'))
         
+
 
         self.setWindowTitle("Optimization Algorthms")
         #Set button functions
