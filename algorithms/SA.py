@@ -14,6 +14,8 @@ import math
 import numpy  as np
 import random
 import os
+from solution import solution
+import time
 
 ############################################################################
 
@@ -55,7 +57,18 @@ def update_solution(guess, epson, min_values = [-5,-5], max_values = [5,5], targ
 ############################################################################
 
 # SA Function
-def simulated_annealing(min_values = [-5,-5], max_values = [5,5], mu = 0, sigma = 1, initial_temperature = 1.0, temperature_iterations = 1000, final_temperature = 0.0001, alpha = 0.9, target_function = target_function, verbose = True):    
+def simulated_annealing(min_values = [-5,-5], max_values = [5,5], dim = 1, mu = 0, sigma = 1, initial_temperature = 1.0, temperature_iterations = 1000, final_temperature = 0.0001, alpha = 0.9, target_function = target_function, verbose = True):    
+    if not isinstance(min_values, list):
+        min_values = [min_values for _ in range(dim)]
+        max_values = [max_values for _ in range(dim)]
+    min_values = np.asarray(min_values)
+    max_values = np.asarray(max_values)
+    
+    convergence_curve = []
+    s = solution()
+    print('HHO is now tackling  "' + target_function.__name__ + '"')
+    timerStart = time.time()
+    s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     guess = initial_guess(min_values = min_values, max_values = max_values, target_function = target_function)
     epson = epson_vector(guess, mu = mu, sigma = sigma)
     best  = np.copy(guess)
@@ -65,6 +78,7 @@ def simulated_annealing(min_values = [-5,-5], max_values = [5,5], mu = 0, sigma 
         for repeat in range(0, temperature_iterations):
             if (verbose == True):
                 print('Temperature = ', round(Temperature, 4), ' ; iteration = ', repeat, ' ; f(x) = ', round(best[0, -1], 4))
+                convergence_curve.append(round(best[0, -1], 4))
             fx_old    =  guess[0,-1]    
             epson     = epson_vector(guess, mu = mu, sigma = sigma)
             new_guess = update_solution(guess, epson, min_values = min_values, max_values = max_values, target_function = target_function)
@@ -78,7 +92,15 @@ def simulated_annealing(min_values = [-5,-5], max_values = [5,5], mu = 0, sigma 
             if (fx_new < fx_best):
                 fx_best = fx_new
                 best    = np.copy(guess)
-        Temperature = alpha*Temperature   
-        return best
+        Temperature = alpha*Temperature 
+    timerEnd = time.time()
+    s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")
+    s.executionTime = timerEnd - timerStart
+    s.convergence = convergence_curve
+    s.optimizer = "HHO"
+    s.objfname = target_function.__name__
+    s.best = round(best[0, -1], 4)
+    s.bestIndividual = best[0,1:]  
+    return s
     
 ############################################################################

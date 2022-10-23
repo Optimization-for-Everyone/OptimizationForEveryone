@@ -6,6 +6,7 @@ from multipleRun import MultipleRun
 from algorithms.BAT2 import BatAlgorithm
 from algorithms.FFA2 import FireflyAlgorithm
 from algorithms.SA import simulated_annealing 
+from algorithms.HS import harmony_search
 import functions
 
 
@@ -24,9 +25,9 @@ class Test:
         self.sma = self.functionIndex, self.dim, self.verbose, self.maxiter, self.searchAgents_no, self._lb, self._ub 
 
     def Run(self, opt = Optimizations.FFA):
-        sol = Single(opt, self.params, self.sma)
-        WriteOperations(opt.name,self.functionIndex.name,sol).write()
-        return sol
+        Single(opt, self.params, self.sma)
+        #WriteOperations(opt.name,self.functionIndex.name,sol).write()
+        #return sol
     
     def MultipleRun(self, opt = Optimizations.FFA):
         MultipleRun(self.opt, self.params, self.sma, number = 5)
@@ -51,6 +52,10 @@ class Test:
         # dim array size, -5 lb +5 lb 
         simulated_annealing( min_values = [-500,-500,-500,-500,-500,-500,-500,-500,-500], max_values = [500,500,500,500,500,500,500,500,500], mu = 0, sigma = 1, initial_temperature = 1.0, temperature_iterations = 100,
             final_temperature = 0.0001, alpha = 0.9, target_function = obj_func, verbose = True)
+    
+    def HarmonySearch(self):
+        obj_func = functions.selectFunction(Functions.schwefel)
+        harmony_search(obj_func, 10, 10, None)
 
 
 
@@ -77,8 +82,9 @@ def main():
 
     #-----------FFA 2 TESTING END-------------#
 
-    test.SimulatedAnnealing()
-
+    # test.SimulatedAnnealing()
+    # test.HarmonySearch()
+    test.Run(Optimizations.SA)
 
 
 

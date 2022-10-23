@@ -274,6 +274,7 @@ def AddToOptimizationCombobox(combobox):
         combobox.addItem('Slime Mould Algorithm (SMA)')
         combobox.addItem('Salp Swarm Algorithm (SSA)')
         combobox.addItem('Whale Optimization Algorithm (WOA)')   
+        combobox.addItem('Simulated Annealing (SA)')   
 
 app = QApplication([])
 window = MatplotlibWidget()

@@ -16,4 +16,5 @@ class Optimizations(enum.IntEnum):
     SMA = 12
     SSA = 13
     WOA = 14
-    NONE=15
+    SA = 15
+    NONE = 16
