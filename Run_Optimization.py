@@ -1,4 +1,4 @@
-from algorithms import HHO,BAT,CS,DE,FFA,GWO,JAYA,MFO,MVO,PSO,SCA,SSA,WOA,GA,SA
+from algorithms import HHO,BAT,CS,DE,FFA,GWO,JAYA,MFO,MVO,PSO,SCA,SSA,WOA,GA,SA,HS
 from algorithms.SMA import BaseSMA
 from algorithms.HHO import HHO
 from solution import solution
@@ -28,7 +28,8 @@ def Single(opt, params, sma):
                 Optimizations.SSA: lambda: Run_SSA(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5]),
-                Optimizations.SA: lambda: Run_SA(params[0],params[1],params[2],params[3],params[4],params[5])
+                Optimizations.SA: lambda: Run_SA(params[0],params[1],params[2],params[3],params[4],params[5]),
+                Optimizations.HS: lambda: Run_HS(params[0],params[1],params[2],params[3],params[4],params[5]),
         }
     func = switcher.get(opt, lambda: 'Invalid')
     sol = func()
@@ -185,4 +186,11 @@ def Run_WOA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
 def Run_SA(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
         obj_func = functions.selectFunction(functionIndex)
         solution = SA.simulated_annealing( min_values = _lb, max_values = _ub, dim = dim, temperature_iterations = maxiter, target_function = obj_func)
+        return solution
+
+def Run_HS(functionIndex,maxiter,dim,searchAgents_no,_lb,_ub):
+        lb = [_lb]
+        ub = [_ub]
+        obj_func = functions.selectFunction(functionIndex)
+        solution = HS.HS(obj_func, _lb, _ub, dim, searchAgents_no, maxiter, num_processes = 2)
         return solution

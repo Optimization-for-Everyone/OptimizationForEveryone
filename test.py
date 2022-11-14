@@ -6,9 +6,11 @@ from multipleRun import MultipleRun
 from algorithms.BAT2 import BatAlgorithm
 from algorithms.FFA2 import FireflyAlgorithm
 from algorithms.SA import simulated_annealing 
-from algorithms.HS import harmony_search
+from algorithms.HS import HS
 import functions
-
+from math import pow
+import random
+from multiprocessing import cpu_count
 
 class Test:
     def __init__(self, opt = Optimizations.HHO):
@@ -18,7 +20,7 @@ class Test:
         self._ub = 32768
         self.dim = 30
         #self.problem_size = 30
-        self.searchAgents_no = 100 # pop size
+        self.searchAgents_no = 1000 # pop size
         self.maxiter = 25
         self.verbose = True
         self.params = self.functionIndex, self.maxiter, self.dim, self.searchAgents_no, self._lb, self._ub
@@ -54,11 +56,16 @@ class Test:
             final_temperature = 0.0001, alpha = 0.9, target_function = obj_func, verbose = True)
     
     def HarmonySearch(self):
-        obj_func = functions.selectFunction(Functions.schwefel)
-        harmony_search(obj_func, 10, 10, None)
-
-
-
+        obj_func = functions.selectFunction(Functions.ackley)
+        sol = HS(obj_func, lb = -1000, ub = 1000, dim = 2, SearchAgents_no=0, num_iterations = 5, num_processes = 2)
+        # print('endTime: ',sol.endTime)
+        # print('executionTime: ',sol.executionTime)
+        # print('convergence: ',sol.convergence)
+        # print('optimizer: ',sol.optimizer)
+        # print('objfname: ',sol.objfname)
+        # print('best: ',sol.best)
+        # print('bestIndividual: ',sol.bestIndividual)
+        return sol
 
 def main():
 
@@ -66,7 +73,7 @@ def main():
 
     #-----------MULTIRUN TESTING START-----------#
 
-    #test.MultipleRun(Optimizations.FFA)
+    test.MultipleRun(Optimizations.BAT)
 
     #-----------MULTIRUN TESTING END-------------#
 
@@ -83,8 +90,8 @@ def main():
     #-----------FFA 2 TESTING END-------------#
 
     # test.SimulatedAnnealing()
-    # test.HarmonySearch()
-    test.Run(Optimizations.SA)
+
+    
 
 
 

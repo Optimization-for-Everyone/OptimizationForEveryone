@@ -66,7 +66,7 @@ def simulated_annealing(min_values = [-5,-5], max_values = [5,5], dim = 1, mu = 
     
     convergence_curve = []
     s = solution()
-    print('HHO is now tackling  "' + target_function.__name__ + '"')
+    print('SA is now tackling  "' + target_function.__name__ + '"')
     timerStart = time.time()
     s.startTime = time.strftime("%Y-%m-%d-%H-%M-%S")
     guess = initial_guess(min_values = min_values, max_values = max_values, target_function = target_function)
