@@ -29,7 +29,6 @@ def Single(opt, params, sma):
                 Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.WOA: lambda: Run_WOA(params[0],params[1],params[2],params[3],params[4],params[5]),
                 Optimizations.SA: lambda: Run_SA(params[0],params[1],params[2],params[3],params[4],params[5]),
-                Optimizations.HS: lambda: Run_HS(params[0],params[1],params[2],params[3],params[4],params[5]),
         }
     func = switcher.get(opt, lambda: 'Invalid')
     sol = func()
