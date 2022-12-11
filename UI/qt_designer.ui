@@ -44,7 +44,7 @@
        <widget class="QLabel" name="label_2">
         <property name="geometry">
          <rect>
-          <x>70</x>
+          <x>80</x>
           <y>60</y>
           <width>151</width>
           <height>21</height>
@@ -135,7 +135,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Number Of Runs</string>
+         <string>Number Of Runs :</string>
         </property>
        </widget>
        <widget class="QComboBox" name="optimizationComboBox_2">
@@ -214,7 +214,7 @@
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>680</x>
+          <x>690</x>
           <y>60</y>
           <width>81</width>
           <height>21</height>
@@ -255,7 +255,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Number Of Runs</string>
+         <string>Number Of Runs :</string>
         </property>
        </widget>
        <widget class="QTextEdit" name="functionTextbox">
@@ -313,7 +313,7 @@
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Number Of Runs</string>
+         <string>Number Of Runs :</string>
         </property>
        </widget>
        <widget class="QPushButton" name="infoButton">
@@ -366,7 +366,7 @@
        <widget class="QLabel" name="label_3">
         <property name="geometry">
          <rect>
-          <x>280</x>
+          <x>290</x>
           <y>60</y>
           <width>151</width>
           <height>21</height>
