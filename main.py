@@ -86,7 +86,8 @@ class MatplotlibWidget(QMainWindow):
             14: 'UI/ellipseFunctionWindow.ui',
             15: 'UI/nesterovFunctionWindow.ui',
             16: 'UI/saddleFunctionWindow.ui',
-            17: ''
+            17: 'UI/nonlinearFunctionWindow.ui',
+            18: ''
         }
         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
 
@@ -241,6 +242,7 @@ def AddItemsToComboBox(self):
         self.functionComboBox.addItem('ellipse')
         self.functionComboBox.addItem('nesterov')
         self.functionComboBox.addItem('saddle')
+        self.functionComboBox.addItem('nonlinear')
         self.functionComboBox.addItem('custom')
 
         #Add items to optimization combo Box

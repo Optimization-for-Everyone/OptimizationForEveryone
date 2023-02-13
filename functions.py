@@ -182,3 +182,32 @@ def saddle( x ):
     x = np.asarray_chkfinite(x) - 1
     return np.mean( np.diff( x **2 )) \
         + .5 * np.mean( x **4 )
+        
+def nonlinear( x ):
+    x = np.asarray_chkfinite(x) - 1
+    f = 0.36
+    h = 0.15
+    m = 0.02
+    x_t=f*x[0]-x[0]*x[2]
+    y_t=x[0]*x[2]-x[1]
+    v_t=x[1]-m*x[0]*x[2]-h*x[2]    
+    return x_t **2 + y_t **2 + v_t **2
+
+def cvrt( x ):
+    x = np.asarray_chkfinite(x) - 1
+    k=len(x)/3
+    sum=0
+    for i in range(len(x)):
+        Q_t=1/(1+exp^(-t))
+    
+    for i in range(len(x)):
+        Q_t_d=sum+x[k+i]*(1/(1+exp^-(x[k+(i+2)*t+x[k+(i+1)]])))
+    
+    
+    f = 0.36
+    h = 0.15
+    m = 0.02
+    x_t=f*x[0]-x[0]*x[2]
+    y_t=x[0]*x[2]-x[1]
+    v_t=x[1]-m*x[0]*x[2]-h*x[2]    
+    return x_t **2 + y_t **2 + v_t **2

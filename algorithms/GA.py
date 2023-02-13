@@ -412,10 +412,10 @@ def GA(objf, lb, ub, dim, popSize, iters):
         scores = calculateCost(objf, ga, popSize, lb, ub)
 
         bestScore = min(scores)
-
+        
         # Sort from best to worst
         ga, scores = sortPopulation(ga, scores)
-
+        bestIndividual = ga[0];
         convergence_curve[l] = bestScore
 
         if l % 1 == 0:
@@ -425,10 +425,12 @@ def GA(objf, lb, ub, dim, popSize, iters):
                     + str(l + 1)
                     + " the best fitness is "
                     + str(bestScore)
+                    + " and the ind is "
+                    + str(bestIndividual)
                 ]
             )
             s.result.append([l+1,bestScore])
-        print(l)
+        #print(l)
     timerEnd = time.time()
     s.bestIndividual = bestIndividual
     s.endTime = time.strftime("%Y-%m-%d-%H-%M-%S")

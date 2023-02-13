@@ -18,4 +18,5 @@ class Functions(enum.IntEnum):
     ellipse = 14
     nesterov = 15
     saddle = 16
-    custom = 17
+    nonlinear = 17
+    custom = 18

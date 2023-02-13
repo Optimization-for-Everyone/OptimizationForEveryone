@@ -181,6 +181,8 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
                     + str(t+1)
                     + " the best fitness is "
                     + str(Rabbit_Energy)
+                    + " the ind is "
+                    + str(Rabbit_Location)
                 ]
             )
             s.result.append([t+1,Rabbit_Energy])
