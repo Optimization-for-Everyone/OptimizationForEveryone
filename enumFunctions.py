@@ -19,4 +19,5 @@ class Functions(enum.IntEnum):
     nesterov = 15
     saddle = 16
     nonlinear = 17
-    custom = 18
+    cvrt = 18
+    custom = 19

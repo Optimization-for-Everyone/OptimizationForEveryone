@@ -6,12 +6,12 @@ import sympy as sym
 
 import math
 
-t=sym.symbols('t')
-#t=1
+#t=sym.symbols('t')
+t=1
 
 #x =[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]
-x = np.random.uniform(0,1,(45,))
-print(x)
+#x = np.random.uniform(0,1,(45,))
+#print(x)
 #k=len(x)/3
 I_t=0
 I_t_s=0
@@ -33,7 +33,7 @@ print(Q_t)
 for i in range(0,int(len(x)/3),3):
     #I_t_s=I_t_s+x[i]*(1/(1+pow(math.e,-(x[i+2]*t+x[i+1]))))
     I_t_s=I_t_s+x[i]*(1/(1+exp(-(x[i+2]*t+x[i+1]))))
-    #print(I_t_s)
+    print(I_t_s)
 
 for i in range(int(len(x)/3),int(2*len(x)/3),3):
     #U_t_s=U_t_s+x[i]*(1/(1+pow(math.e,-(x[i+2]*t+x[i+1]))))
