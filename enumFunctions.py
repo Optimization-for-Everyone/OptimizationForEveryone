@@ -20,4 +20,5 @@ class Functions(enum.IntEnum):
     saddle = 16
     nonlinear = 17
     cvrt = 18
-    custom = 19
+    BSpline = 19
+    custom = 20

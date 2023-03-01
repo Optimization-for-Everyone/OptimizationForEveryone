@@ -88,7 +88,8 @@ class MatplotlibWidget(QMainWindow):
             16: 'UI/saddleFunctionWindow.ui',
             17: 'UI/nonlinearFunctionWindow.ui',
             18: 'UI/cvrtFunctionWindow.ui',
-            19: ''
+            18: 'UI/BSplineFunctionWindow.ui',
+            20: ''
         }
         infowindow=switcher.get(self.functionComboBox.currentIndex(), "nothing")
 
@@ -245,6 +246,7 @@ def AddItemsToComboBox(self):
         self.functionComboBox.addItem('saddle')
         self.functionComboBox.addItem('nonlinear')
         self.functionComboBox.addItem('cvrt')
+        self.functionComboBox.addItem('BSpline')
         self.functionComboBox.addItem('custom')
 
         #Add items to optimization combo Box
@@ -260,8 +262,6 @@ def AddItemsToComboBox(self):
                 self.optimizationComboBox_3.addItem('None')
                 self.optimizationComboBox_3.setCurrentIndex(Optimizations.NONE)
                 
-        
-
 def AddToOptimizationCombobox(combobox):
         combobox.addItem('BAT')
         combobox.addItem('Cuckoo Search (CS)')

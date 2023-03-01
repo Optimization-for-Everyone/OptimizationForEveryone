@@ -133,7 +133,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
 
         if l % 1 == 0:
             print(
-                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)]
+                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score) + " the best ind is " + str(Alpha_pos)]
             )
 
     timerEnd = time.time()
