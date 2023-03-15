@@ -196,7 +196,10 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.objfname = objf.__name__
     s.best = Rabbit_Energy
     s.bestIndividual = Rabbit_Location
-
+    print("Final best", s.bestIndividual)
+    
+    
+    
     return s
 
 

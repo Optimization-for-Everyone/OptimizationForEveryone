@@ -11,7 +11,7 @@ def SSA(objf, lb, ub, dim, N, Max_iteration):
     # lb=-100
     # ub=100
     # dim=30
-    N = 50  # Number of search agents
+    # N = 50  # Number of search agents
     if not isinstance(lb, list):
         lb = [lb] * dim
     if not isinstance(ub, list):
@@ -107,6 +107,8 @@ def SSA(objf, lb, ub, dim, N, Max_iteration):
                     + str(Iteration + 1)
                     + " the best fitness is "
                     + str(FoodFitness)
+                    + " the best ind is "
+                    + str(FoodPosition)
                 ]
             )
 
