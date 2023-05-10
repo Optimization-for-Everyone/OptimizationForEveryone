@@ -18,7 +18,6 @@ import math
 from solution import solution
 import time
 
-
 def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
 
     # dim=30
@@ -181,8 +180,8 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
                     + str(t+1)
                     + " the best fitness is "
                     + str(Rabbit_Energy)
-                    + " the ind is "
-                    + str(Rabbit_Location)
+                    #+ " the ind is "
+                    #+ str(Rabbit_Location)
                 ]
             )
             s.result.append([t+1,Rabbit_Energy])
@@ -196,10 +195,9 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.objfname = objf.__name__
     s.best = Rabbit_Energy
     s.bestIndividual = Rabbit_Location
-    print("Final best", s.bestIndividual)
-    
-    
-    
+    print("Final best ind: ", numpy.array2string(s.bestIndividual,separator=","))
+    print("Final best fitness", s.best)
+
     return s
 
 

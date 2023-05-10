@@ -10,6 +10,7 @@ import numpy
 import math
 from solution import solution
 import time
+import matplotlib.pyplot as plt
 
 
 def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
@@ -133,7 +134,9 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
 
         if l % 1 == 0:
             print(
-                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score) + " the best ind is " + str(Alpha_pos)]
+                ["At iteration " + str(l) + " the best fitness is " + str(Alpha_score)
+                 # + " the best ind is " + str(Alpha_pos)
+                 ]
             )
 
     timerEnd = time.time()
@@ -142,5 +145,76 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.convergence = Convergence_curve
     s.optimizer = "GWO"
     s.objfname = objf.__name__
+    
+    
+    
+    #print("Final best fitness: ", Alpha_score)
+    #print("Final best ind: ", numpy.array2string(Alpha_pos,separator=","))
+    #print("Deneme")
+    myArr=Alpha_pos
+    #print(myArr)
+    N=(int)(len(myArr)/3)
+    #print("N:", N)
+    
+    dt=3
+    f=0.36
+    h=0
+    m=0.02
 
+    I0=0.4
+    Y0=0
+    V0=0.1
+    
+    a0=(1/2+f*(dt/4)-(dt/4)*V0)*I0
+    b0=(1/2-(dt/4))*Y0+(dt/4)*I0*V0
+    c0=(1/2-m*(dt/4)*I0-h*(dt/4))*V0+(dt/4)*Y0  
+    
+    aM1=I0-a0
+    bM1=Y0-b0
+    cM1=V0-c0
+
+    xe=[0] * (len(myArr)+6)
+    xe[0]=aM1
+    xe[1]=bM1
+    xe[2]=cM1
+
+    xe[3]=a0
+    xe[4]=b0
+    xe[5]=c0
+
+    for i in range (len(myArr)):
+        xe[i+6]=myArr[i]
+    
+    pI=[0]*(N+1)
+    pY=[0]*(N+1)
+    pV=[0]*(N+1)
+
+    #pI[0]=0.4
+    #pY[0]=0
+    #pV[0]=0.1
+    #print("plot_I:",pI)
+    #print("plot_Y:",pY)
+    #print("plot_V:",pV)
+    #print("Test1")
+
+    for i in range(0,N+1):
+        pI[i]=xe[3*i]+xe[3*i+3]
+        pY[i]=xe[3*i+1]+xe[3*i+4]
+        pV[i]=xe[3*i+2]+xe[3*i+5]
+
+    print("plot_I:",pI)
+    print("plot_Y:",pY)
+    print("plot_V:",pV)
+    #print("Test2")
+    xpoints=[i for i in range(0, N+1)]
+    #ypoints=pI
+    #print("xpoints: ", xpoints)
+    #print("ypoints: ", ypoints)
+
+    plt.plot(xpoints,pI, label="I")
+    plt.plot(xpoints,pY, label="Y")
+    plt.plot(xpoints,pV, label="V")
+    plt.legend()
+    plt.show()
+    
     return s
