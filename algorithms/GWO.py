@@ -189,14 +189,6 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     pY=[0]*(N+1)
     pV=[0]*(N+1)
 
-    #pI[0]=0.4
-    #pY[0]=0
-    #pV[0]=0.1
-    #print("plot_I:",pI)
-    #print("plot_Y:",pY)
-    #print("plot_V:",pV)
-    #print("Test1")
-
     for i in range(0,N+1):
         pI[i]=xe[3*i]+xe[3*i+3]
         pY[i]=xe[3*i+1]+xe[3*i+4]
@@ -205,12 +197,9 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     print("plot_I:",pI)
     print("plot_Y:",pY)
     print("plot_V:",pV)
-    #print("Test2")
+    
+    
     xpoints=[i for i in range(0, N+1)]
-    #ypoints=pI
-    #print("xpoints: ", xpoints)
-    #print("ypoints: ", ypoints)
-
     plt.plot(xpoints,pI, label="I")
     plt.plot(xpoints,pY, label="Y")
     plt.plot(xpoints,pV, label="V")
