@@ -4,8 +4,6 @@ from numpy import sin, cos, tan ,cosh, tanh, sinh, abs, exp, mean, pi, prod, sqr
 from sympy import *
 import sympy as sym
 
-from solution import solution #emrah added
-
 function = "sum(x**2)"
 
 
@@ -370,10 +368,6 @@ def BSpline( x ):
     f=0.36
     h=0
     m=0.02
-
-    # I=[0] * (N*3)
-    # Y=[0] * (N*3)
-    # V=[0] * (N*3)
     
     I0=0.4
     Y0=0
@@ -404,7 +398,6 @@ def BSpline( x ):
         xe[i+6]=x[i]
     
     #print("xe:", xe)
-    fitness=0
     D=[0] * (len(x))
     # #original below
     for i in range (0,len(x),3):
@@ -424,7 +417,8 @@ def BSpline( x ):
     #     fit[i] = xe[3*i+6]-xe[3*i+3]+xe[3*i+7]-xe[3*i+4]+xe[3*i+8]-xe[3*i+5]-f*(dt/2)*(xe[3*i+6]+xe[3*i+3])+h*(dt/2)*(xe[3*i+8]+xe[3*i+5])+m*(dt/2)*(xe[3*i+6]+xe[3*i+3])*(xe[3*i+8]+xe[3*i+5])
 
     #     #print("D[",i,"]:", D[i])
-
+    
+    fitness=0
     for i in range(len(x)):
         fitness=fitness+D[i]*D[i]
         #fitness=fitness+abs(D[i])
@@ -456,36 +450,9 @@ def BSpline( x ):
     #fitness=EI+EY+EV
     #fitness=EI+EY+EV+EC
 
-
-    
-    #print("D:", D)
-
     # fitness=0
     # for i in range(len(x)):
     #     fitness=fitness+D[i]*D[i]
     #     #fitness=fitness+abs(D[i])
 
-    # myS = solution()
-    # bestFit = myS.best
-    # bestInd = myS.bestIndividual
-    
-    # print("Final best fitness: ", bestFit)
-    # print("Final best ind: ", bestInd)
-        
-    # pI=[0]*(N+1)
-    # pY=[0]*(N+1)
-    # pV=[0]*(N+1)
-
-    # pI[0]=I0
-    # pY[0]=Y0
-    # pV[0]=V0
-
-    # for i in range(0,N+1):
-    #     pI[i+1]=bestInd[3*i]+bestInd[3*i+3]
-    #     pY[i+1]=bestInd[3*i+1]+bestInd[3*i+4]
-    #     pV[i+1]=bestInd[3*i+2]+bestInd[3*i+5]
-
-    # print("pI:",pI)
-    # print("pY:",pY)
-    # print("pV:",pV)
     return fitness
