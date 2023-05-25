@@ -1,9 +1,0 @@
-Optimizer: GA
-ObjFucName: ackley
-StartTime: 2022-08-05-22-52-01
-EndTime: 2022-08-05-22-52-06
-ExecutionTime: 4.4373297691345215
-Best: 0
-BestIndividual:
-[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
- 0. 0. 0. 0. 0. 0.]

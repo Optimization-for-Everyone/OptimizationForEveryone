@@ -17,6 +17,8 @@ import numpy
 import math
 from solution import solution
 import time
+import matplotlib.pyplot as plt
+
 
 def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
 
@@ -195,8 +197,66 @@ def HHO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.objfname = objf.__name__
     s.best = Rabbit_Energy
     s.bestIndividual = Rabbit_Location
+    
     print("Final best ind: ", numpy.array2string(s.bestIndividual,separator=","))
     print("Final best fitness", s.best)
+
+    myArr=s.bestIndividual
+    #print(myArr)
+    N=(int)(len(myArr)/3)
+    #print("N:", N)
+    
+    dt=1
+    f=0.36
+    h=0.0
+    m=0.02
+
+    I0=0.4
+    Y0=0.0
+    V0=0.1
+    
+    a0=(0.5+f*(dt/4)-(dt/4)*V0)*I0
+    b0=(0.5-(dt/4))*Y0+(dt/4)*I0*V0
+    c0=(0.5-m*(dt/4)*I0-h*(dt/4))*V0+(dt/4)*Y0
+    
+    aM1=I0-a0
+    bM1=Y0-b0
+    cM1=V0-c0
+
+    xe=[0.0] * (len(myArr)+6)
+    xe[0]=aM1
+    xe[1]=bM1
+    xe[2]=cM1
+
+    xe[3]=a0
+    xe[4]=b0
+    xe[5]=c0
+
+    for i in range (len(myArr)):
+        xe[i+6]=myArr[i]
+    
+    plotI=[0.0]*(N+1)
+    plotY=[0.0]*(N+1)
+    plotV=[0.0]*(N+1)
+
+    for i in range(0,N+1):
+        plotI[i]=xe[3*i]+xe[3*i+3]
+        plotY[i]=xe[3*i+1]+xe[3*i+4]
+        plotV[i]=xe[3*i+2]+xe[3*i+5]
+
+    print("plot_I:",plotI)
+    print("plot_Y:",plotY)
+    print("plot_V:",plotV)
+        
+    xpoints=[i for i in range(0, N+1)]
+    plt.plot(xpoints,plotI, label="I")
+    plt.plot(xpoints,plotY, label="Y")
+    plt.plot(xpoints,plotV, label="V")
+    plt.legend()
+    plt.show() 
+
+
+
 
     return s
 
