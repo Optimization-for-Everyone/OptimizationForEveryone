@@ -148,21 +148,21 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     
     
     
-    #print("Final best fitness: ", Alpha_score)
-    #print("Final best ind: ", numpy.array2string(Alpha_pos,separator=","))
+    print("Final best fitness: ", Alpha_score)
+    print("Final best ind: ", numpy.array2string(Alpha_pos,separator=","))
     #print("Deneme")
     myArr=Alpha_pos
     #print(myArr)
     N=(int)(len(myArr)/3)
     #print("N:", N)
     
-    dt=3
+    dt=1.0
     f=0.36
-    h=0
+    h=0.0
     m=0.02
 
     I0=0.4
-    Y0=0
+    Y0=0.0
     V0=0.1
     
     a0=(1/2+f*(dt/4)-(dt/4)*V0)*I0
@@ -173,7 +173,7 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     bM1=Y0-b0
     cM1=V0-c0
 
-    xe=[0] * (len(myArr)+6)
+    xe=[0.0] * (len(myArr)+6)
     xe[0]=aM1
     xe[1]=bM1
     xe[2]=cM1
@@ -185,25 +185,24 @@ def GWO(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     for i in range (len(myArr)):
         xe[i+6]=myArr[i]
     
-    pI=[0]*(N+1)
-    pY=[0]*(N+1)
-    pV=[0]*(N+1)
+    plotI=[0.0]*(N+1)
+    plotY=[0.0]*(N+1)
+    plotV=[0.0]*(N+1)
 
     for i in range(0,N+1):
-        pI[i]=xe[3*i]+xe[3*i+3]
-        pY[i]=xe[3*i+1]+xe[3*i+4]
-        pV[i]=xe[3*i+2]+xe[3*i+5]
+        plotI[i]=xe[3*i]+xe[3*i+3]
+        plotY[i]=xe[3*i+1]+xe[3*i+4]
+        plotV[i]=xe[3*i+2]+xe[3*i+5]
 
-    print("plot_I:",pI)
-    print("plot_Y:",pY)
-    print("plot_V:",pV)
+    print("plot_I:",plotI)
+    print("plot_Y:",plotY)
+    print("plot_V:",plotV)
     
     
     xpoints=[i for i in range(0, N+1)]
-    plt.plot(xpoints,pI, label="I")
-    plt.plot(xpoints,pY, label="Y")
-    plt.plot(xpoints,pV, label="V")
+    plt.plot(xpoints,plotI, label="I")
+    plt.plot(xpoints,plotY, label="Y")
+    plt.plot(xpoints,plotV, label="V")
     plt.legend()
     plt.show()
-    
     return s

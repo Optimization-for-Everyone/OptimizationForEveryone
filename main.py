@@ -1,10 +1,10 @@
 #------------------------------------------------------
 # ---------------------- main.py -----------------------
 # ------------------------------------------------------
+import PyQt5
 from tabnanny import verbose
 from PyQt5.QtWidgets import*
 from PyQt5.uic import loadUi
-import PyQt5
 from matplotlib.pyplot import get
 import functions
 from functions import custom

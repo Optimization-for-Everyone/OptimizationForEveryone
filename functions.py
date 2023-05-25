@@ -363,14 +363,14 @@ def BSpline( x ):
     x = np.asarray_chkfinite(x)
     N=(int)(len(x)/3)
     
-    dt=3
+    dt=1.0
 
     f=0.36
-    h=0
+    h=0.0
     m=0.02
     
     I0=0.4
-    Y0=0
+    Y0=0.0
     V0=0.1
 
     a0=(1/2+f*(dt/4)-(dt/4)*V0)*I0
@@ -385,7 +385,7 @@ def BSpline( x ):
     bM1=Y0-b0
     cM1=V0-c0
 
-    xe=[0] * (len(x)+6)
+    xe=[0.0] * (len(x)+6)
     xe[0]=aM1
     xe[1]=bM1
     xe[2]=cM1
@@ -398,14 +398,14 @@ def BSpline( x ):
         xe[i+6]=x[i]
     
     #print("xe:", xe)
-    D=[0] * (len(x))
+    D=[0.0] * (len(x)+3)
     # #original below
-    for i in range (0,len(x),3):
-        D[i]=(-1-f*(dt/2)+(dt/2)*(xe[i+5]+xe[i+8]))*xe[i+3]+(1-f*(dt/2)+(dt/2)*(xe[i+5]+xe[i+8]))*xe[i+6]
+    for i in range (0,len(x)+3,3):
+        D[i]=(-1-f*(dt/2)+(dt/2)*(xe[i+2]+xe[i+5]))*xe[i]+(1-f*(dt/2)+(dt/2)*(xe[i+2]+xe[i+5]))*xe[i+3]
         #print("D[",i,"]:", D[i])
-        D[i+1]=(-1+(dt/2))*xe[i+4]+(1+(dt/2))*xe[i+7]-(dt/2)*(xe[i+3]+xe[i+6])*(xe[i+5]+xe[i+8])
+        D[i+1]=(-1+(dt/2))*xe[i+1]+(1+(dt/2))*xe[i+4]-(dt/2)*(xe[i]+xe[i+3])*(xe[i+2]+xe[i+5])
         #print("D[",i+1,"]:", D[i+1])
-        D[i+2]=(-1+m*(dt/2)*(xe[i+3]+xe[i+6])+h*(dt/2))*xe[i+5]+(1+m*(dt/2)*(xe[i+3]+xe[i+6])+h*(dt/2))*xe[i+8]-(dt/2)*(xe[i+4]+xe[i+7])
+        D[i+2]=(-1+m*(dt/2)*(xe[i]+xe[i+3])+h*(dt/2))*xe[i+2]+(1+m*(dt/2)*(xe[i]+xe[i+3])+h*(dt/2))*xe[i+5]-(dt/2)*(xe[i+1]+xe[i+4])
         #print("D[",i+2,"]:", D[i+2])
          #fitness=fitness+(1/(len(x)/3))*(D[i]**2+D[i+1]**2+D[i+2]**2)+(1/3)*((D[i]-I[0])**2+(D[i+1]-Y[0])**2+(D[i+2]-V[0])**2)
 
@@ -418,41 +418,10 @@ def BSpline( x ):
 
     #     #print("D[",i,"]:", D[i])
     
-    fitness=0
-    for i in range(len(x)):
+    fitness=0.0
+    for i in range(len(x)+1):
         fitness=fitness+D[i]*D[i]
         #fitness=fitness+abs(D[i])
         #fitness=fitness+abs(fit[i])
-        
-        
-    # fitness=0
-    # EI=0
-    # EY=0
-    # EV=0
-    # #EC=0
-    # #I0=xe[3]+xe[6]
-    # #Y0=xe[4]+xe[7]
-    # #V0=xe[5]+xe[8]
-    # for i in range (0,len(x),3):
-    #     EI=EI+D[i]**2
-    #     EY=EY+D[i+1]**2
-    #     EV=EV+D[i+2]**2
-    # EI=(1/N)*EI
-    # EY=(1/N)*EY
-    # EV=(1/N)*EV
-    
-    #EC=(1/3)*((I0-I[0])**2+(Y0-Y[0])**2+(V0-V[0])**2)        
-
-    # print("EI: ", EI)
-    # print("EY: ", EY)
-    # print("EV: ", EV)
-    # print("EC: ", EC)
-    #fitness=EI+EY+EV
-    #fitness=EI+EY+EV+EC
-
-    # fitness=0
-    # for i in range(len(x)):
-    #     fitness=fitness+D[i]*D[i]
-    #     #fitness=fitness+abs(D[i])
 
     return fitness
