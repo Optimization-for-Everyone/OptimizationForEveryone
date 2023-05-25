@@ -358,47 +358,6 @@ def cvrt( x ):
 
     return E
 
-# def BSpline( x ):
-    
-#     x = np.asarray_chkfinite(x)
-#     N=(int)(len(x)/3)
-#     dt=10
-
-#     f=0.36
-#     h=0.0
-#     m=0.02
-    
-#     I0=0.4
-#     Y0=0.0
-#     V0=0.1
-
-#     xe=[0.0] * (len(x)+3)
-#     xe[0]=I0
-#     xe[1]=Y0
-#     xe[2]=V0
-
-#     for i in range (len(x)):
-#         xe[i+3]=x[i]
-        
-#     #print("xe:", xe)
-#     D=[0.0] * (len(x))
-#         # #original below
-#     for i in range (0,len(x),3):
-#         D[i]=xe[i+3]-(1+dt*(f-xe[i+2]))*xe[i]
-#         #print("D[",i,"]:", D[i])
-#         D[i+1]=xe[i+4]-(1-dt)*xe[i+1]+dt*xe[i+3]*xe[i+5]
-#         #print("D[",i+1,"]:", D[i+1])
-#         D[i+2]=xe[i+5]-(1+dt*(m*xe[i]+h))*xe[i+2]+dt*xe[i+1]
-#         #print("D[",i+2,"]:", D[i+2])
-        
-#     fitness=0.0
-#     for i in range(len(x)):
-#         fitness=fitness+D[i]*D[i]
-#         #fitness=fitness+abs(D[i])
-#         #fitness=fitness+abs(fit[i])
-
-#     return fitness
-
 def BSpline( x ):
     
     x = np.asarray_chkfinite(x)
@@ -413,40 +372,28 @@ def BSpline( x ):
     Y0=0.0
     V0=0.1
 
-    a0=(0.5+f*(dt/4)-(dt/4)*V0)*I0
-    b0=(0.5-(dt/4))*Y0+(dt/4)*I0*V0
-    c0=(0.5-m*(dt/4)*I0-h*(dt/4))*V0+(dt/4)*Y0
-
-    #print("a0:", a0)
-    #print("b0:", b0)
-    #print("c0:", c0)
-
-    aM1=I0-a0
-    bM1=Y0-b0
-    cM1=V0-c0
-
-    xe=[0.0] * (len(x)+6)
-    xe[0]=aM1
-    xe[1]=bM1
-    xe[2]=cM1
-
-    xe[3]=a0
-    xe[4]=b0
-    xe[5]=c0
-
-    for i in range (len(x)):
-        xe[i+6]=x[i]
-        
-    #print("xe:", xe)
+    I = [0.0] * (N+1)
+    Y = [0.0] * (N+1)
+    V = [0.0] * (N+1)
+    
+    I[0] = I0
+    Y[0] = Y0
+    V[0] = V0
+    
+    I[1:(N+1)] = x[:N]
+    Y[1:(N+1)] = x[N:2*N]
+    V[1:(N+1)] = x[2*N:]
+    
     D=[0.0] * (len(x))
         # #original below
-    for i in range (0,len(x),3):
-        D[i]=(-1-f*(dt/2)+(dt/2)*(xe[i+5]+xe[i+8]))*xe[i+3]+(1-f*(dt/2)+(dt/2)*(xe[i+5]+xe[i+8]))*xe[i+6]
-        #print("D[",i,"]:", D[i])
-        D[i+1]=(-1+(dt/2))*xe[i+4]+(1+(dt/2))*xe[i+7]-(dt/2)*(xe[i+3]+xe[i+6])*(xe[i+5]+xe[i+8])
-        #print("D[",i+1,"]:", D[i+1])
-        D[i+2]=(-1+m*(dt/2)*(xe[i+3]+xe[i+6])+h*(dt/2))*xe[i+5]+(1+m*(dt/2)*(xe[i+3]+xe[i+6])+h*(dt/2))*xe[i+8]-(dt/2)*(xe[i+4]+xe[i+7])
-        #print("D[",i+2,"]:", D[i+2])
+    for i in range (0,N):
+        j=3*i
+        D[j]=I[i+1]-((1 + dt * (f - V[i])) * I[i])
+        #print("D[",j,"]:", D[j])
+        D[j+1]=Y[i+1]-((1 - dt) * Y[i] + dt * I[i] * V[i])
+        #print("D[",j+1,"]:", D[j+1])
+        D[j+2]=V[i+1]-((1 - dt * (m * I[i] + h)) * V[i] + dt * Y[i])
+        #print("D[",j+2,"]:", D[j+2])
 
     fitness=0.0
     for i in range(len(x)):

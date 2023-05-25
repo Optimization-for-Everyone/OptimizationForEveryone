@@ -1,8 +1,0 @@
-Optimizer: BAT
-ObjFucName: ackley
-StartTime: 2022-08-05-22-47-35
-EndTime: 2022-08-05-22-47-40
-ExecutionTime: 5.570415496826172
-Best: 0
-BestIndividual:
-[]
